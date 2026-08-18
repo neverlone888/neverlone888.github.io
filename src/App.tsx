@@ -1,9 +1,9 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
-import Experience from "./components/Experience";
 import Stats from "./components/Stats";
+import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -12,10 +12,11 @@ import BootScreen from "./components/BootScreen";
 import Toasts from "./components/Toasts";
 import SnakeGame from "./projects/SnakeGame";
 import CrawlerDemo from "./projects/CrawlerDemo";
+import VisionDemo from "./projects/VisionDemo";
 import "./App.css";
 
-/** 页面视图：首页 / 贪吃蛇 / 爬虫 */
-export type View = "home" | "snake" | "crawler";
+/** 页面视图：首页 / 贪吃蛇 / 爬虫 / 视觉识别 */
+export type View = "home" | "snake" | "crawler" | "vision";
 
 function App() {
   const [view, setView] = useState<View>("home");
@@ -52,6 +53,7 @@ function App() {
 
       {view === "snake" && <SnakeGame onBack={() => setView("home")} />}
       {view === "crawler" && <CrawlerDemo onBack={() => setView("home")} />}
+      {view === "vision" && <VisionDemo onBack={() => setView("home")} />}
 
       <MusicPlayer />
       <Toasts />

@@ -1,4 +1,4 @@
-﻿import { profile } from "../data/profile";
+import { profile } from "../data/profile";
 import { loadSolved } from "../data/flags";
 import { useCountUp } from "../hooks/useCountUp";
 import Reveal from "./Reveal";
@@ -20,7 +20,7 @@ export default function Stats() {
   return (
     <Reveal className="stats">
       <Stat label="技能数量" value={profile.skills.length} />
-      <Stat label="可玩项目" value={2} />
+      <Stat label="可玩项目" value={3} />
       <Stat label="已解 Flag" value={loadSolved().length} />
       <Stat label="本机访问" value={visits} />
     </Reveal>

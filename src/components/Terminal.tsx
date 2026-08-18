@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { View } from "../App";
 import { profile } from "../data/profile";
 
@@ -17,6 +17,7 @@ const HELP = [
   "  contact       联系我",
   "  snake         打开贪吃蛇",
   "  crawler       打开爬虫项目",
+  "  vision        打开人脸识别项目",
   "  music         播放/暂停音乐",
   "  flag          查看 flag 提示",
   "  clear         清空终端",
@@ -74,6 +75,9 @@ export default function Terminal({
     } else if (cmd === "crawler") {
       push("正在启动 爬虫项目 ...", "ok");
       setTimeout(() => onOpen("crawler"), 350);
+    } else if (cmd === "vision") {
+      push("正在启动 人脸识别项目 ...", "ok");
+      setTimeout(() => onOpen("vision"), 350);
     } else if (cmd === "music") {
       window.dispatchEvent(new CustomEvent("toggle-music"));
       push("♪ 已切换音乐（Call of Silence）", "ok");

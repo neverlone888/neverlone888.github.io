@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import type { View } from "../App";
 import { flags, loadSolved, addSolved } from "../data/flags";
 import { toast } from "../utils/toast";
@@ -36,6 +36,17 @@ const projects: {
     desc: "网络爬虫项目：网页演示版可实时抓取公开数据；完整 Python 爬虫代码在 projects/crawler/ 目录中。",
     tags: ["Python", "爬虫", "公开 API"],
     hint: "成功抓取一次数据后可发现 flag",
+  },
+  {
+    key: "vision",
+    icon: "👁️",
+    name: "人脸识别·动作捕捉·手势识别",
+    category: "AI",
+    difficulty: "hard",
+    points: 300,
+    desc: "使用 OpenCV.js 实时进行人脸识别、动作捕捉与手势识别，需要摄像头；完整 Python 代码在 projects/opencv/ 目录中。",
+    tags: ["OpenCV", "人脸识别", "手势识别", "动作捕捉"],
+    hint: "打开项目并启动摄像头，检测到人脸即可发现 flag",
   },
 ];
 
