@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Stats from "./components/Stats";
+import SkillShowcase from "./components/SkillShowcase";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
@@ -44,6 +45,7 @@ function App() {
           <Hero onOpen={setView} onNavigate={goSection} />
           <About />
           <Stats />
+          <SkillShowcase />
           <Experience />
           <Projects onOpen={setView} />
           <Contact />

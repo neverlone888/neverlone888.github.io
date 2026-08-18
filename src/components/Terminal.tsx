@@ -12,6 +12,7 @@ const HELP = [
   "  help          显示帮助",
   "  whoami        我是谁",
   "  about         个人简历",
+  "  skills        技能说明",
   "  experience    个人经历",
   "  projects      项目作品",
   "  contact       联系我",
@@ -60,6 +61,9 @@ export default function Terminal({
     } else if (cmd === "about") {
       push("正在跳转到 个人简历 ...", "ok");
       onNavigate("about");
+    } else if (cmd === "skills") {
+      push("正在跳转到 技能说明 ...", "ok");
+      onNavigate("skills");
     } else if (cmd === "experience") {
       push("正在跳转到 个人经历 ...", "ok");
       onNavigate("experience");

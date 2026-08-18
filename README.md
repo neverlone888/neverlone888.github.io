@@ -82,3 +82,25 @@ public/music/call-of-silence.mp3
 
 - `.npmrc` 配置了国内镜像源 `registry.npmmirror.com`，加速依赖下载，只影响本项目。
 - 爬虫演示版通过公开 API 实现；Python 完整版见 `projects/crawler/crawler.py`。
+
+---
+
+## 九、技能说明区块：怎么上传自己的图片
+
+网站里新增了「技能说明」板块（在导航栏"技能"），目前有 4 张占位图。
+
+**方法一（最简单，不用改代码）：**
+1. 打开文件夹 `D:\个人网站\public\skills\`
+2. 把你自己的图片命名成和占位图一样的名字，直接覆盖：
+   - `skill-1.svg`（医学基础）
+   - `skill-2.svg`（AI 编程）
+   - `skill-3.svg`（前端开发）
+   - `skill-4.svg`（网络爬虫）
+   - 支持 `.jpg` / `.png` / `.webp` / `.svg`
+3. 刷新网页即可看到你的图片
+
+**方法二（想改文字或加更多图片）：**
+打开 `src\data\skills.ts`，里面每一张图都有：标题（title）、说明（desc）、图片路径（image）。
+加一张图就复制一组 `{ ... }`，并把 image 改成你的文件名，例如 `"/skills/我的证书.png"`。
+
+> 提示：图片建议 600×400 左右，显示效果最佳；不修改文件名直接覆盖占位图即可。

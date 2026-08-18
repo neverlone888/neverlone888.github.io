@@ -936,3 +936,65 @@
   color: var(--muted);
   min-height: 1.4em;
 }
+/* ============================================================
+   技能说明区块
+   ============================================================ */
+
+.skills-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.1rem;
+}
+
+.skill-show-card {
+  overflow: hidden;
+  padding: 0;
+}
+
+.skill-show-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--border);
+  background: #04070d;
+}
+
+.skill-show-body {
+  padding: 1rem 1.2rem 1.3rem;
+}
+
+.skill-show-body h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.skill-show-body h3::before {
+  content: "> ";
+  color: var(--accent);
+  font-family: var(--mono);
+}
+
+.skill-show-body p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.skill-img-fallback {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  background: #04070d;
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem;
+}
