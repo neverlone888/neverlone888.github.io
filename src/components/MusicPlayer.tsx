@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { loadFromStorage, saveToStorage } from "../utils/storage";
+import { toast } from "../utils/toast";
 
 /** 音乐播放器：播放《Call of Silence》（泽野弘之） */
 export default function MusicPlayer() {
@@ -14,6 +15,14 @@ export default function MusicPlayer() {
     if (audioRef.current) audioRef.current.volume = volume;
   }, [volume]);
 
+  // 支持终端命令 music 触发播放/暂停
+  useEffect(() => {
+    const handler = () => togglePlay();
+    window.addEventListener("toggle-music", handler);
+    return () => window.removeEventListener("toggle-music", handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playing]);
+
   function togglePlay() {
     const audio = audioRef.current;
     if (!audio) return;
@@ -24,7 +33,10 @@ export default function MusicPlayer() {
       audio
         .play()
         .then(() => setPlaying(true))
-        .catch(() => setMissing(true));
+        .catch(() => {
+          setMissing(true);
+          toast("未找到音乐文件：public/music/call-of-silence.mp3", "error");
+        });
     }
   }
 

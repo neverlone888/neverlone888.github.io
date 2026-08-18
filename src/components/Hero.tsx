@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { profile } from "../data/profile";
+import type { View } from "../App";
 import Reveal from "./Reveal";
+import Terminal from "./Terminal";
 
-/** 打字机效果：逐字显示一句话 */
+/** 打字机效果 */
 function useTypewriter(text: string, speed = 85) {
   const [display, setDisplay] = useState("");
   useEffect(() => {
@@ -18,7 +20,13 @@ function useTypewriter(text: string, speed = 85) {
   return display;
 }
 
-export default function Hero() {
+export default function Hero({
+  onOpen,
+  onNavigate,
+}: {
+  onOpen: (v: View) => void;
+  onNavigate: (id: string) => void;
+}) {
   const typed = useTypewriter(profile.tagline);
 
   return (
@@ -35,6 +43,7 @@ export default function Hero() {
           <a className="btn btn-primary" href="#projects">查看项目</a>
           <a className="btn btn-ghost" href="#about">关于我</a>
         </div>
+        <Terminal onOpen={onOpen} onNavigate={onNavigate} />
       </Reveal>
     </section>
   );

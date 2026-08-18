@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { loadFromStorage, saveToStorage } from "../utils/storage";
+import { flags } from "../data/flags";
 
 const GRID = 20;          // 棋盘 20 x 20
 const CELL = 20;          // 每格像素
@@ -17,7 +18,7 @@ const DIRS: Record<Dir, Point> = {
 
 const OPPOSITE: Record<Dir, Dir> = { up: "down", down: "up", left: "right", right: "left" };
 
-/** 贪吃蛇：Canvas 实现，键盘 + 屏幕按钮控制，最高分存 localStorage */
+/** 贪吃蛇：Canvas 实现，键盘 + 屏幕按钮控制，最高分存 localStorage，得分≥10 发现 flag */
 export default function SnakeGame({ onBack }: { onBack: () => void }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const snakeRef = useRef<Point[]>([
@@ -36,6 +37,8 @@ export default function SnakeGame({ onBack }: { onBack: () => void }) {
   const [high, setHigh] = useState<number>(highRef.current);
   const [status, setStatus] = useState<"idle" | "running" | "over">("idle");
   const statusRef = useRef(status);
+  const [flagRevealed, setFlagRevealed] = useState(false);
+  const flagShownRef = useRef(false);
 
   useEffect(() => { statusRef.current = status; }, [status]);
 
@@ -90,6 +93,8 @@ export default function SnakeGame({ onBack }: { onBack: () => void }) {
     speedRef.current = 140;
     scoreRef.current = 0;
     setScore(0);
+    flagShownRef.current = false;
+    setFlagRevealed(false);
     foodRef.current = spawnFood(snakeRef.current);
     setStatus("idle");
     draw();
@@ -112,6 +117,10 @@ export default function SnakeGame({ onBack }: { onBack: () => void }) {
     if (head.x === foodRef.current.x && head.y === foodRef.current.y) {
       scoreRef.current += 1;
       setScore(scoreRef.current);
+      if (scoreRef.current >= 10 && !flagShownRef.current) {
+        flagShownRef.current = true;
+        setFlagRevealed(true);
+      }
       if (scoreRef.current > highRef.current) {
         highRef.current = scoreRef.current;
         setHigh(highRef.current);
@@ -213,9 +222,11 @@ export default function SnakeGame({ onBack }: { onBack: () => void }) {
           <button className="btn btn-ghost" onClick={() => pressDir("right")}>→</button>
         </div>
 
-        <p className="snake-hint">方向键 / WASD 控制方向，空格或回车开始 / 暂停。最高分保存在浏览器本地。</p>
+        {flagRevealed && (
+          <p className="flag-found">🎯 发现 flag：<b>{flags.snake}</b> —— 回首页项目卡片提交解锁成就！</p>
+        )}
+        <p className="snake-hint">方向键 / WASD 控制方向，空格或回车开始 / 暂停。得分 ≥ 10 可发现 flag，最高分保存在浏览器本地。</p>
       </div>
     </div>
   );
 }
-

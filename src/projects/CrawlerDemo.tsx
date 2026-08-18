@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { flags } from "../data/flags";
 
 interface Book {
   title: string;
@@ -12,7 +13,7 @@ interface ApiDoc {
   first_publish_year?: number;
 }
 
-/** 爬虫项目：浏览器演示版（通过公开 API 演示抓取流程） */
+/** 爬虫项目：浏览器演示版（通过公开 API 演示抓取流程，成功后可发现 flag） */
 export default function CrawlerDemo({ onBack }: { onBack: () => void }) {
   const [keyword, setKeyword] = useState("医学");
   const [log, setLog] = useState<string[]>(["> 爬虫演示已就绪。输入关键词，点击“开始抓取”。"]);
@@ -38,6 +39,7 @@ export default function CrawlerDemo({ onBack }: { onBack: () => void }) {
       lines.push("> 连接成功，开始抓取数据 ...");
       lines.push("> 共找到 " + (data.numFound ?? 0) + " 条记录，解析前 8 条 ...");
       lines.push("> 完成！");
+      lines.push("🎯 flag：" + flags.crawler + " —— 回首页项目卡片提交解锁成就！");
       setLog([...lines]);
 
       const books: Book[] = ((data.docs as ApiDoc[]) || []).map((d) => ({

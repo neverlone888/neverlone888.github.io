@@ -626,3 +626,243 @@
   transform: scale(1.08);
   border-color: var(--accent);
 }
+
+/* ============================================================
+   新交互样式：开机动画 / 交互终端 / toast / 挑战卡片 / 成就条
+   ============================================================ */
+
+/* ---------- 开机终端动画 ---------- */
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: #04070d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.boot-box {
+  width: min(560px, 90vw);
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(0, 255, 209, 0.5);
+}
+
+.boot-line { margin: 0.3rem 0; }
+.boot-prompt { margin-top: 1.2rem; color: var(--text); }
+
+/* ---------- 交互终端 ---------- */
+.terminal {
+  margin: 2rem auto 0;
+  max-width: 640px;
+  text-align: left;
+  background: #04070d;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 255, 209, 0.08);
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.55rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-r { background: #ff5f57; }
+.dot-y { background: #febc2e; }
+.dot-g { background: #28c840; }
+
+.terminal-title {
+  margin-left: 8px;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.terminal-body {
+  padding: 0.8rem 0.9rem;
+  min-height: 140px;
+  max-height: 240px;
+  overflow-y: auto;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.terminal-line { margin: 0.15rem 0; white-space: pre-wrap; word-break: break-all; }
+.terminal-line.cmd { color: var(--text); }
+.terminal-line.ok { color: var(--accent); }
+.terminal-line.err { color: var(--danger); }
+.terminal-line.out { color: var(--muted); }
+
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding: 0.55rem 0.9rem;
+}
+
+.terminal-prompt { font-family: var(--mono); color: var(--accent); font-weight: 700; }
+
+.terminal-input-row input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+}
+
+/* ---------- toast 消息 ---------- */
+.toasts {
+  position: fixed;
+  top: 72px;
+  right: 16px;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 320px;
+}
+
+.toast {
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  animation: toastIn 0.3s ease;
+}
+
+.toast-success { border-color: var(--accent); color: var(--accent); }
+.toast-error { border-color: var(--danger); color: var(--danger); }
+.toast-info { border-color: var(--accent-2); color: #a8c0ff; }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ---------- 挑战式项目卡片 ---------- */
+.challenge-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.challenge-cat {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 5px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid rgba(0, 255, 209, 0.3);
+}
+
+.challenge-points {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-2);
+  text-shadow: 0 0 12px rgba(77, 124, 255, 0.6);
+}
+
+.challenge-diff {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0.4rem 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.diff-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #27354a;
+}
+
+.diff-dot.on { background: var(--accent); box-shadow: 0 0 8px rgba(0, 255, 209, 0.7); }
+
+.diff-label {
+  margin-left: 6px;
+  text-transform: uppercase;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+.challenge-hint { color: var(--muted); font-size: 0.85rem; margin: 0.6rem 0; }
+
+.flag-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+.flag-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.55rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #04070d;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.flag-row input:focus { border-color: var(--accent); }
+.flag-row input:disabled { opacity: 0.5; }
+.flag-btn { padding: 0.5rem 0.9rem; font-size: 0.85rem; }
+
+.flag-found {
+  font-family: var(--mono);
+  color: var(--accent);
+  border: 1px dashed rgba(0, 255, 209, 0.5);
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+  background: var(--accent-dim);
+}
+
+/* ---------- 成就数据条 ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1.5rem 1rem;
+}
+
+.stat {
+  text-align: center;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.2rem 0.8rem;
+}
+
+.stat-num {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  text-shadow: 0 0 16px rgba(0, 255, 209, 0.45);
+}
+
+.stat-label { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.85rem; }
