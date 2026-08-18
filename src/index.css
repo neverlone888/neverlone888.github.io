@@ -1,0 +1,107 @@
+/* ============================================================
+   全局样式：深色科技风（仿 CTF 平台风格）
+   ============================================================ */
+
+:root {
+  --bg: #070b12;
+  --panel: #0c1420;
+  --panel-2: #101a2b;
+  --border: #1e2c40;
+  --text: #c9d6e3;
+  --muted: #7d8ba0;
+  --accent: #00ffd1;
+  --accent-dim: rgba(0, 255, 209, 0.12);
+  --accent-2: #4d7cff;
+  --danger: #ff4d6d;
+  --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* 网格背景 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(0, 255, 209, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 209, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* 顶部光晕 */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(600px 300px at 50% 0%, rgba(77, 124, 255, 0.16), transparent 70%),
+    radial-gradient(500px 300px at 88% 18%, rgba(0, 255, 209, 0.07), transparent 70%);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-shadow: 0 0 8px rgba(0, 255, 209, 0.6);
+}
+
+/* 滚动渐入动画 */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 终端闪烁光标 */
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 1.1em;
+  background: var(--accent);
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+
+/* 唱片旋转 */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
