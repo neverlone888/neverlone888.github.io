@@ -4,7 +4,7 @@ import type { View } from "../App";
 
 const links = [
   { id: "about", label: "关于我" },
-  { id: "skills", label: "技能" },
+  { id: "certificates", label: "证书" },
   { id: "experience", label: "经历" },
   { id: "projects", label: "项目" },
   { id: "contact", label: "联系" },

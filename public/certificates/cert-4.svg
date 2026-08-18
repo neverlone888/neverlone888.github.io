@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <rect x="12" y="12" width="576" height="376" rx="10" fill="#f5f2e9" stroke="#d8c9a3" stroke-width="6"/>
+  <rect x="30" y="30" width="540" height="340" rx="6" fill="none" stroke="#c9b57f" stroke-width="2"/>
+  <text x="300" y="150" font-family="serif" font-size="42" font-weight="bold" fill="#7a5c1e" text-anchor="middle">证 书</text>
+  <text x="300" y="210" font-family="sans-serif" font-size="18" fill="#8a6d2f" text-anchor="middle">证书 4（用你的证书图片替换）</text>
+  <text x="300" y="330" font-family="sans-serif" font-size="14" fill="#a08a55" text-anchor="middle">public/certificates/cert-4.svg</text>
+</svg>

@@ -9,19 +9,19 @@ interface HistoryItem {
 
 const HELP = [
   "可用命令：",
-  "  help          显示帮助",
-  "  whoami        我是谁",
-  "  about         个人简历",
-  "  skills        技能说明",
-  "  experience    个人经历",
-  "  projects      项目作品",
-  "  contact       联系我",
-  "  snake         打开贪吃蛇",
-  "  crawler       打开爬虫项目",
-  "  vision        打开人脸识别项目",
-  "  music         播放/暂停音乐",
-  "  flag          查看 flag 提示",
-  "  clear         清空终端",
+  "  help            显示帮助",
+  "  whoami          我是谁",
+  "  about           个人简历",
+  "  certificates    证书墙",
+  "  experience      个人经历",
+  "  projects        项目作品",
+  "  contact         联系我",
+  "  snake           打开贪吃蛇",
+  "  crawler         打开爬虫项目",
+  "  vision          打开人脸识别项目",
+  "  music           播放/暂停音乐",
+  "  flag            查看 flag 提示",
+  "  clear           清空终端",
 ];
 
 /** 交互式终端：仿 CTF 平台的命令行交互 */
@@ -61,9 +61,9 @@ export default function Terminal({
     } else if (cmd === "about") {
       push("正在跳转到 个人简历 ...", "ok");
       onNavigate("about");
-    } else if (cmd === "skills") {
-      push("正在跳转到 技能说明 ...", "ok");
-      onNavigate("skills");
+    } else if (cmd === "certificates" || cmd === "cert") {
+      push("正在跳转到 证书墙 ...", "ok");
+      onNavigate("certificates");
     } else if (cmd === "experience") {
       push("正在跳转到 个人经历 ...", "ok");
       onNavigate("experience");
