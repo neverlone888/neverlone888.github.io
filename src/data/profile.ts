@@ -12,7 +12,7 @@ export const profile = {
   tagline: "主修医学 · 辅修 AI 编程",
   location: "贵州",
   email: "2040594606@qq.com",
-  github: "https://github.com/你的用户名",
+  github: "https://github.com/neverlone888",
   phone: "17848564983",  // 电话
   wechat: "17848564983", // 微信（与电话同号）
 
