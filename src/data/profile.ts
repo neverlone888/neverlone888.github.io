@@ -13,6 +13,8 @@ export const profile = {
   location: "贵州",
   email: "2040594606@qq.com",
   github: "https://github.com/你的用户名",
+  phone: "17848564983",  // 电话
+  wechat: "17848564983", // 微信（与电话同号）
 
   // ---------- 个人简介（改这里） ----------
   intro:
@@ -21,6 +23,21 @@ export const profile = {
   // ---------- 技能清单（改这里） ----------
   skills: ["医学基础", "法医学", "Python", "机器学习", "AI 应用", "数据分析", "React", "TypeScript", "Git"],
 
+  // ---------- 兴趣爱好（改这里） ----------
+  hobbies: [
+    { icon: "🎵", name: "音乐", desc: "喜欢听音乐，放松心情" },
+    { icon: "💻", name: "编程", desc: "自学 AI 编程，折腾各种小工具" },
+    { icon: "📚", name: "阅读", desc: "喜欢阅读医学与科技类书籍" },
+    { icon: "⚽", name: "运动", desc: "偶尔运动，保持活力" },
+  ],
+
+  // ---------- 个人特长（改这里） ----------
+  strengths: [
+    { icon: "🧬", name: "医学基础", desc: "系统学习法医学专业课程" },
+    { icon: "🤖", name: "AI 应用", desc: "熟练使用 AI 工具解决实际问题" },
+    { icon: "🐍", name: "Python", desc: "机器学习与数据分析" },
+    { icon: "🗣️", name: "沟通表达", desc: "数码产品销售经验，善于沟通" },
+  ],
   // ---------- 教育经历（改这里） ----------
   education: [
     {

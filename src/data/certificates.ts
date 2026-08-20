@@ -15,8 +15,7 @@ export interface CertificateItem {
 }
 
 export const certificates: CertificateItem[] = [
-  { title: "证书 1", date: "20XX", image: "/certificates/cert-1.svg" },
-  { title: "证书 2", date: "20XX", image: "/certificates/cert-2.svg" },
-  { title: "证书 3", date: "20XX", image: "/certificates/cert-3.svg" },
-  { title: "证书 4", date: "20XX", image: "/certificates/cert-4.svg" },
+  { title: "证书 1", date: "2026", image: "/certificates/cert-1.jpg" },
+  { title: "证书 2", date: "20XX", image: "/certificates/cert-2.jpg" },
+  { title: "证书 3", date: "20XX", image: "/certificates/cert-3.jpg" },
 ];

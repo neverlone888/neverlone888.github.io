@@ -5,6 +5,8 @@ import About from "./components/About";
 import Stats from "./components/Stats";
 import CertificateWall from "./components/CertificateWall";
 import Experience from "./components/Experience";
+import Hobbies from "./components/Hobbies";
+import Strengths from "./components/Strengths";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -47,6 +49,8 @@ function App() {
           <Stats />
           <CertificateWall />
           <Experience />
+          <Hobbies />
+          <Strengths />
           <Projects onOpen={setView} />
           <Contact />
           <Footer />

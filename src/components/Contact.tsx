@@ -13,6 +13,8 @@ export default function Contact() {
       <Reveal className="card contact-card">
         <p className="item-title">邮箱：<a href={"mailto:" + profile.email}>{profile.email}</a></p>
         <p className="item-title">GitHub：<a href={profile.github} target="_blank" rel="noreferrer">{profile.github}</a></p>
+        <p className="item-title">电话：{profile.phone || "（待填写）"}</p>
+        <p className="item-title">微信：{profile.wechat || "（待填写）"}</p>
         <p className="item-title">所在地：{profile.location}</p>
       </Reveal>
     </section>

@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // GitHub Pages 部署：使用相对路径，保证子目录下资源也能正常加载
+  base: "./",
   plugins: [react()],
   server: {
     watch: {

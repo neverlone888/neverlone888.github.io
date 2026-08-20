@@ -101,6 +101,23 @@
   text-shadow: 0 0 30px rgba(0, 255, 209, 0.45), 0 0 60px rgba(77, 124, 255, 0.3);
 }
 
+.hero-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.hero-avatar {
+  width: clamp(72px, 14vw, 120px);
+  height: clamp(72px, 14vw, 120px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 24px rgba(0, 255, 209, 0.35);
+  background: #04120e;
+}
 .hero-title {
   margin: 1.1rem 0 0.3rem;
   font-family: var(--mono);
@@ -1061,4 +1078,40 @@
   background: #04070d;
   text-align: center;
   padding: 0.5rem;
+}
+/* ============================================================
+   兴趣爱好 / 个人特长
+   ============================================================ */
+
+.interest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.1rem;
+}
+
+.interest-card {
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+.interest-icon {
+  display: block;
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.interest-name {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.interest-name::before {
+  content: "> ";
+  color: var(--accent);
+  font-family: var(--mono);
+}
+
+.interest-card .item-desc {
+  margin: 0;
 }
