@@ -1,0 +1,5249 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>个人网站项目 · 完整源码</title>
+<style>
+  :root { --accent:#0aa; --bg:#f6f8fa; --card:#fff; --border:#dde3e8; --text:#24292f; --muted:#57606a; --code-bg:#0d1117; --code:#e6edf3; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.65; }
+  header.doc { background:linear-gradient(135deg,#0d1117,#161b22); color:#fff; padding:3rem 1.5rem; text-align:center; }
+  header.doc h1 { margin:0 0 .4rem; font-size:2rem; }
+  header.doc p { margin:.3rem 0; color:#9da7b3; }
+  main { max-width:960px; margin:0 auto; padding:2rem 1.2rem 4rem; }
+  h2 { border-left:4px solid var(--accent); padding-left:.7rem; margin-top:2.6rem; font-size:1.35rem; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:1.2rem 1.4rem; margin:1rem 0; }
+  .grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:.8rem; }
+  .grid2 div b { display:block; color:var(--muted); font-size:.82rem; }
+  .grid2 div span { font-size:.95rem; }
+  ul.tree { list-style:none; padding:0; margin:0; columns:2; column-gap:2rem; font-family:Consolas,monospace; font-size:.82rem; }
+  ul.tree li { break-inside:avoid; padding:.18rem 0; }
+  ul.tree em { color:var(--muted); font-style:normal; font-size:.75rem; }
+  .t-bin { opacity:.55; }
+  .file { margin:.6rem 0; }
+  details { background:var(--card); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+  summary { cursor:pointer; padding:.7rem 1rem; display:flex; justify-content:space-between; align-items:center; gap:.6rem; background:#f0f3f6; user-select:none; }
+  summary:hover { background:#e8edf2; }
+  .fpath { font-family:Consolas,monospace; font-weight:600; font-size:.88rem; word-break:break-all; }
+  .fmeta { color:var(--muted); font-size:.75rem; white-space:nowrap; }
+  pre.code { margin:0; padding:1rem; background:var(--code-bg); color:var(--code); overflow:auto; max-height:480px; font-family:Consolas,"Courier New",monospace; font-size:.8rem; line-height:1.5; tab-size:2; }
+  code { white-space:pre; }
+  footer { text-align:center; color:var(--muted); font-size:.85rem; padding:2rem; }
+  .note { background:#fff8e6; border:1px solid #f0d78c; border-radius:8px; padding:.8rem 1rem; font-size:.9rem; }
+  @media (max-width:640px){ ul.tree { columns:1; } }
+</style>
+</head>
+<body>
+<header class="doc">
+  <h1>个人网站项目 · 完整项目源码</h1>
+  <p>项目名称：个人网站（个人简历 / 仿 CTF 风格交互网站）</p>
+  <p>作者：周颖乐 &nbsp;|&nbsp; 技术栈：Vite + React + TypeScript</p>
+  <p>线上地址：https://neverlone888.github.io/</p>
+</header>
+<main>
+  <section>
+    <h2>一、项目概览</h2>
+    <div class="card grid2">
+      <div><b>项目类型</b><span>个人简历网站</span></div>
+      <div><b>技术栈</b><span>React 19 / TypeScript / Vite</span></div>
+      <div><b>主要功能</b><span>开机动画、交互终端、证书墙、兴趣爱好、个人特长、项目演示（贪吃蛇 / 爬虫 / 人脸识别）、音乐播放器、联系方式</span></div>
+      <div><b>数据存储</b><span>浏览器 localStorage / 静态资源</span></div>
+    </div>
+    <div class="note">&#128221; 本文档为 HTML 格式的提交材料，内含本项目的<b>完整源码</b>（共 48 个文本源码文件、约 4883 行代码），并附项目完整文件清单。图片、音乐、OpenCV 等二进制资源与完整工程请见随附压缩包。</div>
+  </section>
+
+  <section>
+    <h2>二、项目文件结构</h2>
+    <div class="card">
+      <ul class="tree">
+    <li><span class="t-ok">&#128193;</span> README.md</li>
+    <li><span class="t-ok">&#128193;</span> package.json</li>
+    <li><span class="t-ok">&#128193;</span> package-lock.json</li>
+    <li><span class="t-ok">&#128193;</span> vite.config.ts</li>
+    <li><span class="t-ok">&#128193;</span> tsconfig.json</li>
+    <li><span class="t-ok">&#128193;</span> tsconfig.app.json</li>
+    <li><span class="t-ok">&#128193;</span> tsconfig.node.json</li>
+    <li><span class="t-ok">&#128193;</span> .gitignore</li>
+    <li><span class="t-ok">&#128193;</span> .npmrc</li>
+    <li><span class="t-ok">&#128193;</span> .gitattributes</li>
+    <li><span class="t-ok">&#128193;</span> index.html</li>
+    <li><span class="t-ok">&#128193;</span> .github/workflows/deploy.yml</li>
+    <li><span class="t-ok">&#128193;</span> src/main.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/App.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/App.css</li>
+    <li><span class="t-ok">&#128193;</span> src/index.css</li>
+    <li><span class="t-ok">&#128193;</span> src/components/About.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/BootScreen.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/CertificateWall.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Contact.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Experience.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Footer.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Hero.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Hobbies.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/MusicPlayer.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Navbar.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Projects.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Reveal.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Stats.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Strengths.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Terminal.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Toasts.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/data/certificates.ts</li>
+    <li><span class="t-ok">&#128193;</span> src/data/flags.ts</li>
+    <li><span class="t-ok">&#128193;</span> src/data/profile.ts</li>
+    <li><span class="t-ok">&#128193;</span> src/hooks/useCountUp.ts</li>
+    <li><span class="t-ok">&#128193;</span> src/utils/storage.ts</li>
+    <li><span class="t-ok">&#128193;</span> src/utils/toast.ts</li>
+    <li><span class="t-ok">&#128193;</span> src/projects/CrawlerDemo.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/projects/SnakeGame.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/projects/VisionDemo.tsx</li>
+    <li><span class="t-ok">&#128193;</span> projects/README.md</li>
+    <li><span class="t-ok">&#128193;</span> projects/crawler/README.md</li>
+    <li><span class="t-ok">&#128193;</span> projects/crawler/crawler.py</li>
+    <li><span class="t-ok">&#128193;</span> projects/opencv/README.md</li>
+    <li><span class="t-ok">&#128193;</span> projects/opencv/face_gesture.py</li>
+    <li><span class="t-ok">&#128193;</span> public/favicon.svg</li>
+    <li><span class="t-ok">&#128193;</span> public/music/说明.txt</li>
+    <li><span class="t-bin">&#128444;</span> public/avatar.jpg <em>（二进制资源，155.8 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/certificates/cert-1.jpg <em>（二进制资源，315.6 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/certificates/cert-2.jpg <em>（二进制资源，309.5 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/certificates/cert-3.jpg <em>（二进制资源，614.9 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/music/call-of-silence.mp3 <em>（二进制资源，7.32 MB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/opencv/haarcascade_frontalface_default.xml <em>（二进制资源，908.3 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/opencv/opencv.js <em>（二进制资源，10.46 MB）</em></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>三、完整源码</h2>
+    <p class="card" style="margin-top:0">点击文件可展开 / 折叠查看对应源码。</p>
+<section class="file">
+  <details>
+    <summary><span class="fpath">README.md</span><span class="fmeta">107 行 · 3.9 KB</span></summary>
+    <pre class="code"><code># 个人简历网站（仿 CTF 平台风格）
+
+这是一个深色科技风的个人简历网站，使用 **Vite + React + TypeScript** 构建。
+
+**特点：**
+- 仿 CTF 平台的深色终端风格（网格背景、霓虹光效、终端标签）
+- 首页打字机效果、滚动渐入动画
+- 项目作品区有 **2 个可打开体验的项目**：贪吃蛇游戏、爬虫项目
+- 内置音乐播放器（默认歌曲：泽野弘之《Call of Silence》）
+- 所有用户数据保存在浏览器 localStorage（音量、最高分、访问次数）
+
+---
+
+## 一、如何启动项目
+
+1. 打开终端，进入项目文件夹：
+   ```bash
+   cd D:\个人网站
+   ```
+2. 启动开发服务器：
+   ```bash
+   npm run dev
+   ```
+3. 浏览器打开提示的网址（通常是 http://localhost:5173/，被占用时会自动换端口）
+
+## 二、如何停止项目
+
+在运行项目的终端按 `Ctrl + C`，输入 `y` 回车。
+
+## 三、如何重新打开项目
+
+重复上面的「启动项目」步骤即可，不需要重新安装依赖。
+
+## 四、音乐怎么设置（重要）
+
+网站内置了音乐播放器，默认播放《Call of Silence》（泽野弘之）。
+
+请把你**合法获取**的 MP3 文件放到：
+
+```
+public/music/call-of-silence.mp3
+```
+
+文件名必须是 `call-of-silence.mp3`。放好后刷新网站，点击右下角的唱片按钮即可播放。
+（可用 QQ音乐 / 网易云等平台下载；没有放文件时，网站也能正常运行，只是没有音乐。）
+
+## 五、如何修改个人资料
+
+所有文字内容都在 `src/data/profile.ts`，直接改引号里的文字即可。
+
+## 六、项目结构
+
+```
+个人网站/
+├── public/music/              # 放音乐文件（call-of-silence.mp3）
+├── projects/
+│   └── crawler/               # 爬虫项目（Python 完整版代码）
+├── src/
+│   ├── data/profile.ts        # ★ 个人资料（改这里）
+│   ├── components/            # 页面组件（导航/首屏/简历/经历/项目/联系/页脚/音乐）
+│   ├── projects/
+│   │   ├── SnakeGame.tsx      # 贪吃蛇游戏
+│   │   └── CrawlerDemo.tsx    # 爬虫演示页
+│   ├── utils/storage.ts       # localStorage 工具
+│   ├── App.tsx                # 页面入口
+│   ├── App.css / index.css    # 样式
+│   └── main.tsx               # 启动文件
+├── .gitignore / .npmrc / package.json / vite.config.ts ...
+└── README.md
+```
+
+## 七、常用命令
+
+| 命令 | 作用 |
+|------|------|
+| `npm run dev` | 启动本地开发服务器 |
+| `npm run build` | 打包正式版本（生成到 dist/） |
+| `npm run preview` | 预览打包后的版本 |
+| `npm run lint` | 检查代码规范 |
+
+## 八、备注
+
+- `.npmrc` 配置了国内镜像源 `registry.npmmirror.com`，加速依赖下载，只影响本项目。
+- 爬虫演示版通过公开 API 实现；Python 完整版见 `projects/crawler/crawler.py`。
+
+---
+
+
+## 九、证书墙：怎么上传自己的证书图片
+
+网站里有「证书墙」板块（导航栏"证书"），照片墙风格，目前有 4 张占位证书图。
+
+**方法一（最简单，不用改代码）：**
+1. 打开文件夹 `D:\个人网站\public\certificates\`
+2. 把你的证书图片命名成和占位图一样的名字，直接覆盖：
+   - `cert-1.svg`（证书 1）
+   - `cert-2.svg`（证书 2）
+   - `cert-3.svg`（证书 3）
+   - `cert-4.svg`（证书 4）
+   - 支持 `.jpg` / `.png` / `.webp` / `.svg`
+3. 刷新网页即可看到你的证书
+
+**方法二（想改证书名称/时间，或加更多证书）：**
+打开 `src\data\certificates.ts`，每张证书有：名称（title）、时间（date）、图片路径（image）。
+加一张就复制一组 `{ ... }`，并把 image 改成你的文件名，例如 `"/certificates/国家奖学金.png"`。
+
+&gt; 提示：证书图片建议 600×400 左右，显示效果最佳；不修改文件名直接覆盖占位图即可。</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">package.json</span><span class="fmeta">25 行 · 503 B</span></summary>
+    <pre class="code"><code>{
+  "name": "personal-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b &amp;&amp; vite build",
+    "lint": "oxlint",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.4",
+    "oxlint": "^1.75.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.0"
+  }
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">package-lock.json</span><span class="fmeta">1310 行 · 40.0 KB</span></summary>
+    <pre class="code"><code>{
+  "name": "personal-site",
+  "version": "0.1.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "personal-site",
+      "version": "0.1.0",
+      "dependencies": {
+        "react": "^19.2.8",
+        "react-dom": "^19.2.8"
+      },
+      "devDependencies": {
+        "@types/react": "^19.2.17",
+        "@types/react-dom": "^19.2.3",
+        "@vitejs/plugin-react": "^6.0.4",
+        "oxlint": "^1.75.0",
+        "typescript": "~6.0.2",
+        "vite": "^8.2.0"
+      }
+    },
+    "node_modules/@oxc-project/types": {
+      "version": "0.144.0",
+      "resolved": "https://registry.npmmirror.com/@oxc-project/types/-/types-0.144.0.tgz",
+      "integrity": "sha512-nuhZIOLuI6TFQ32I/WnUx+SCPY7SdSKwgnFHydAuoS1+Z4BRcaP+RRJmGzl9lw+0OFF7UmaESf7KQRXaNLHypg==",
+      "dev": true,
+      "license": "MIT",
+      "funding": {
+        "url": "https://github.com/sponsors/Boshen"
+      }
+    },
+    "node_modules/@oxlint/binding-android-arm-eabi": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-android-arm-eabi/-/binding-android-arm-eabi-1.78.0.tgz",
+      "integrity": "sha512-Bu819lmAfZMUHErrpe0cEWj3iaefuUODHSU8+UbXy67V/r7/7f4K3FL0NmbD85E+wiFLDYuhP8Zlv0XnVeXshw==",
+      "cpu": [
+        "arm"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "android"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-android-arm64": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-android-arm64/-/binding-android-arm64-1.78.0.tgz",
+      "integrity": "sha512-CDfxZgB61B7buRdY2FJoAYYPPXCZ1EoC1LKscnC5dg3kjobdxiconvAvvN1BmHyW4PyFT3jRLDag/BY/roSNBQ==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "android"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-darwin-arm64": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-darwin-arm64/-/binding-darwin-arm64-1.78.0.tgz",
+      "integrity": "sha512-2Y2U9Ahrz+OO0Ej88f9SJYq51/jUBp1Mc7iZu0ukrbeeZ3gpRGfzIFnoqfHDY96xr0GEfNrPUBFEy0nN5aD7HA==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "darwin"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-darwin-x64": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-darwin-x64/-/binding-darwin-x64-1.78.0.tgz",
+      "integrity": "sha512-rpych6eJq6m9jDRypTEaPD1xysaEW5h9+xuxhGK/QhOg+/xaqPZrCrTNoIl/f3nEjuJeCEmstNDlrE9rJi/3/g==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "darwin"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-freebsd-x64": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-freebsd-x64/-/binding-freebsd-x64-1.78.0.tgz",
+      "integrity": "sha512-IcMGrQT3QizkOESUJd5et+rOhVqSkNDfNik1cvrKDqIbzqx9KMtRswpFgkCuNTSwylCFLKhGUu8KmqY1ZnC0Dg==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "freebsd"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-linux-arm-gnueabihf": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-linux-arm-gnueabihf/-/binding-linux-arm-gnueabihf-1.78.0.tgz",
+      "integrity": "sha512-/uLdoJ0IXE6vo/0f0LKjinQAp+re+VMaCWaNT8ENIv2EOCkSsc8SGaflXAuW0Jua2dq5+GLVWm1NQK7P3UFSNQ==",
+      "cpu": [
+        "arm"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-linux-arm-musleabihf": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-linux-arm-musleabihf/-/binding-linux-arm-musleabihf-1.78.0.tgz",
+      "integrity": "sha512-7xi4Wb/O8NRJhLoUXmDJMUVpNYvB5kefdhFU1Jb8rtae4QoXlTiLwI14X4YvAXVZLNZChP8m5qO9SQAlWQTbkQ==",
+      "cpu": [
+        "arm"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-linux-arm64-gnu": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-linux-arm64-gnu/-/binding-linux-arm64-gnu-1.78.0.tgz",
+      "integrity": "sha512-4hFW0+fVXa3OIh1Y4A5SPkmvI4wuuBSrCVKzOyE7PTjhc7yEqZ1pmvEEeS5Lj/MaqvegFxXyF33N+6jkehxdyg==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "libc": [
+        "glibc"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-linux-arm64-musl": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-linux-arm64-musl/-/binding-linux-arm64-musl-1.78.0.tgz",
+      "integrity": "sha512-oC0mvsgBJjlMijSDEhx9KuvR9zYeHXceA9MjbuXB1F8NSR78Yj2unOBrstEvTVaq+pko+kuue6DajC00eqvTdg==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "libc": [
+        "musl"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-linux-ppc64-gnu": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-linux-ppc64-gnu/-/binding-linux-ppc64-gnu-1.78.0.tgz",
+      "integrity": "sha512-XAllT5SUZS+ohjuZ3/5S0cwe0r7eboiuigeStCZ5DXRYx/2KVM2UvQXvAfyzXEimtQjAB7cDQ2YxDe2Zl2WNQQ==",
+      "cpu": [
+        "ppc64"
+      ],
+      "dev": true,
+      "libc": [
+        "glibc"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-linux-riscv64-gnu": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-linux-riscv64-gnu/-/binding-linux-riscv64-gnu-1.78.0.tgz",
+      "integrity": "sha512-trucMER/0QtecoXvc1y/UVqE3kwJipDwrx4oHfj+nNm3dq2zjP44WT0CfHNDPM3G1DXIkx/gY6lAD21NSCZVhA==",
+      "cpu": [
+        "riscv64"
+      ],
+      "dev": true,
+      "libc": [
+        "glibc"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-linux-riscv64-musl": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-linux-riscv64-musl/-/binding-linux-riscv64-musl-1.78.0.tgz",
+      "integrity": "sha512-cm3O4F/HQbdzOUX5mKHqG5KDL6E5w0pnlZ+fbBy2rmLryPOowkuLagFHTopQsEIpjcaZoPOrL+BmmAytAG9HFg==",
+      "cpu": [
+        "riscv64"
+      ],
+      "dev": true,
+      "libc": [
+        "musl"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-linux-s390x-gnu": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-linux-s390x-gnu/-/binding-linux-s390x-gnu-1.78.0.tgz",
+      "integrity": "sha512-33wRf6HqGNsybJ3qX4cGaQN2ODPxNmc1rMa0mrTmx3eFq1VzOnvQooi9bIGVYakW8a/wmqVx1mgsUm8R2xfTiw==",
+      "cpu": [
+        "s390x"
+      ],
+      "dev": true,
+      "libc": [
+        "glibc"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-linux-x64-gnu": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-linux-x64-gnu/-/binding-linux-x64-gnu-1.78.0.tgz",
+      "integrity": "sha512-rRdISSYegj6VganMZ9tjRjijowfHJ09IZU01i0toBAqr6n5LEtwHq2IeS4FjW2RoskOHlb6efB26H5izYb3GEQ==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "libc": [
+        "glibc"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-linux-x64-musl": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-linux-x64-musl/-/binding-linux-x64-musl-1.78.0.tgz",
+      "integrity": "sha512-GmsP4rW0xTL6u5CVdcDsaN5Fbc7hBc382Wmar1kttbnwSEviM+rSINKOMQ+UQ6iH+AGwC+8gaAiwu134Tgh6Lg==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "libc": [
+        "musl"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-openharmony-arm64": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-openharmony-arm64/-/binding-openharmony-arm64-1.78.0.tgz",
+      "integrity": "sha512-sy9yeYuADc8a+n4TLBayzMCZiHPW78DcIFVpOXTmdKHWQeM9xe5uzkqIIZmi326D5hY9XVwacipEB1p7tQjPAg==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "openharmony"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-win32-arm64-msvc": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-win32-arm64-msvc/-/binding-win32-arm64-msvc-1.78.0.tgz",
+      "integrity": "sha512-rjc2hF1KfMi8fZj1X/m3AmnHbdsF3rL0v6KQg0Uc880Yb2khjz+3U14sfdZ7jWTpRnN1m1NQa/TT7uU9lJWPrA==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-win32-ia32-msvc": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-win32-ia32-msvc/-/binding-win32-ia32-msvc-1.78.0.tgz",
+      "integrity": "sha512-zcuXFVrEFHIafRfkCQT8w/Xe41o07ozl/vwHq7p94vB29xVzsB0sZGYORU1jhcYKv3Lr0J3HbJ2T4fHH5rWmvA==",
+      "cpu": [
+        "ia32"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@oxlint/binding-win32-x64-msvc": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/@oxlint/binding-win32-x64-msvc/-/binding-win32-x64-msvc-1.78.0.tgz",
+      "integrity": "sha512-Sb5ocmLSuYeOuXd+CFOToGKp/gjXUEWDnvIGwhnh8aq8wY4TMmEnKnvbogSW7RdMZv77JSARduS7/gv+khYEjA==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-android-arm64": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-android-arm64/-/binding-android-arm64-1.2.4.tgz",
+      "integrity": "sha512-jHC2cnyKz5xU2fhECtFl8OZ83cYNt13GZQD+0uMJ/X3o+ijmd56okHhTUwxVSHPx1IRVIJEZ1/1pPzeLCU6XKA==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "android"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-darwin-arm64": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-darwin-arm64/-/binding-darwin-arm64-1.2.4.tgz",
+      "integrity": "sha512-Dc5mPD8F5F/FS8i01syd7FTF6yB2fVthH/TRkjwJkzUK6EpoxHtqvZQP5Zwq80/5z19TWYHIg1KOHboCgVx/aQ==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "darwin"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-darwin-x64": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-darwin-x64/-/binding-darwin-x64-1.2.4.tgz",
+      "integrity": "sha512-fpDm4oBo6SqLvWUYCmFhdde3U9KH2fRNNMeAnAPAIwxRL345xutL0EtEUcuoxsoazdJGv/MuDBQHlCDrtbvqOg==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "darwin"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-freebsd-x64": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-freebsd-x64/-/binding-freebsd-x64-1.2.4.tgz",
+      "integrity": "sha512-rSJoreDE/HoIzoaib6MTp5jQtCTdMHKIvItAKT/ImS6Y6Ww76oUaeMyp4Vc/fAgd/ehji068IxetHXAnqUwN9A==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "freebsd"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-linux-arm-gnueabihf": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-linux-arm-gnueabihf/-/binding-linux-arm-gnueabihf-1.2.4.tgz",
+      "integrity": "sha512-/jm8OGHgn7oGaJu3i/qZI9spUGcJ+y/lk43ttQ/iO1tOd9NissG6o97bighBCiL+BKRngmcDuR6ikfwYdJmVuQ==",
+      "cpu": [
+        "arm"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-linux-arm64-gnu": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-linux-arm64-gnu/-/binding-linux-arm64-gnu-1.2.4.tgz",
+      "integrity": "sha512-tIP06BeD9EqvECBrPZ+sqdPlYrT+aYaAiu1wYziVx5elRK/ftm33JxVDy2bXGbr6J0CrtirCkR87/X5a2euEng==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "libc": [
+        "glibc"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-linux-arm64-musl": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-linux-arm64-musl/-/binding-linux-arm64-musl-1.2.4.tgz",
+      "integrity": "sha512-Ql1Q0EQqVThvn9VAVlwNzsUvbSFtCMGjLpRRi4pk5i7NZZ4n5ISiLMjHYtus4VQ2PvkSw24zyaCVsiS+sXPj1w==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "libc": [
+        "musl"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-linux-ppc64-gnu": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-linux-ppc64-gnu/-/binding-linux-ppc64-gnu-1.2.4.tgz",
+      "integrity": "sha512-GjbjXD4XXfN19D0LZNbmiCBUoDiRACsYHr0yaIbbn8aFsXjHZifcYqu/W5Er5X2X990WjHXFrxarn5chzItorQ==",
+      "cpu": [
+        "ppc64"
+      ],
+      "dev": true,
+      "libc": [
+        "glibc"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-linux-s390x-gnu": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-linux-s390x-gnu/-/binding-linux-s390x-gnu-1.2.4.tgz",
+      "integrity": "sha512-p5WR0NOwaRmJ/B1b6IjEFLLivwEsf3PrdBIhRbhTCQisbo2SvHHpG4ELB/+FgQNnB88LTOF86upmJmbvZdQ2lw==",
+      "cpu": [
+        "s390x"
+      ],
+      "dev": true,
+      "libc": [
+        "glibc"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-linux-x64-gnu": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-linux-x64-gnu/-/binding-linux-x64-gnu-1.2.4.tgz",
+      "integrity": "sha512-4/GyVjmhR+Tc6HLJvwc1sOhPqAZtySiSMesOZyX6JQ5XBxoTDEMKQzvo07NIK6nTon/SivlZqvhzvuVBNQhObQ==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "libc": [
+        "glibc"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-linux-x64-musl": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-linux-x64-musl/-/binding-linux-x64-musl-1.2.4.tgz",
+      "integrity": "sha512-l9eeLsCNvPpmSXUej0etw/J1eqV0Jj1D5G/xG6YTijmE6dkv6E2QezgWbTfQk63v952DPqrjOCoiqxq7Bw0YUQ==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "libc": [
+        "musl"
+      ],
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-openharmony-arm64": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-openharmony-arm64/-/binding-openharmony-arm64-1.2.4.tgz",
+      "integrity": "sha512-e0F355MSTMm3+UOqtV3L24gFUp2N5m1f8L/7d56deik6va+AXdrt9F8LbzGpeWGWRbZEDq4m8NVnJDeBtf9DZg==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "openharmony"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-win32-arm64-msvc": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-win32-arm64-msvc/-/binding-win32-arm64-msvc-1.2.4.tgz",
+      "integrity": "sha512-AWLi0uBRYh6QlE7OKhiz+phZC0qwtij2QZmhmOdsLdFn64m7oMpooE9ICE3lhm9xMb4SpDo2WbHcxX1iFLFtqw==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/binding-win32-x64-msvc": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/@rolldown/binding-win32-x64-msvc/-/binding-win32-x64-msvc-1.2.4.tgz",
+      "integrity": "sha512-UwSDJOg3dqCAejWdxclJjCsh3Qq4vLYMDxmyHqo1btz3stK2VqgwNd3mm5tuIwzSlGIQ/1H9Hr+Zn09mrezNqQ==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      }
+    },
+    "node_modules/@rolldown/pluginutils": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmmirror.com/@rolldown/pluginutils/-/pluginutils-1.0.1.tgz",
+      "integrity": "sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==",
+      "dev": true,
+      "license": "MIT"
+    },
+    "node_modules/@types/react": {
+      "version": "19.2.18",
+      "resolved": "https://registry.npmmirror.com/@types/react/-/react-19.2.18.tgz",
+      "integrity": "sha512-AnzbBERsrLKtk2XSfTbYRLjQPdy116Sty4q+T+Bp3IC4l6jNBvreVPAHmpq9qhXQM7CXZPjLVmGMw9sy+hxQ3w==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "csstype": "^3.2.2"
+      }
+    },
+    "node_modules/@types/react-dom": {
+      "version": "19.2.4",
+      "resolved": "https://registry.npmmirror.com/@types/react-dom/-/react-dom-19.2.4.tgz",
+      "integrity": "sha512-Bsc+QHgp+P/F02XDzNCY9jnZNCUuLki36KT7VKrTXXLdHf+vHMNZnW1rVu5DNW/rCK+fya3DATySbLM4yhtKUw==",
+      "dev": true,
+      "license": "MIT",
+      "peerDependencies": {
+        "@types/react": "^19.2.0"
+      }
+    },
+    "node_modules/@vitejs/plugin-react": {
+      "version": "6.0.5",
+      "resolved": "https://registry.npmmirror.com/@vitejs/plugin-react/-/plugin-react-6.0.5.tgz",
+      "integrity": "sha512-BOVzne/NL162sMdResB25mUv+vWMF5NoAjNf09TeGlE7ZpszZWSD3winycicLJw72yeVsoCn/2kOhEuCvEShMA==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@rolldown/pluginutils": "^1.0.1"
+      },
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      },
+      "peerDependencies": {
+        "@rolldown/plugin-babel": "^0.1.7 || ^0.2.0",
+        "babel-plugin-react-compiler": "^1.0.0",
+        "vite": "^8.0.0"
+      },
+      "peerDependenciesMeta": {
+        "@rolldown/plugin-babel": {
+          "optional": true
+        },
+        "babel-plugin-react-compiler": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/csstype": {
+      "version": "3.2.3",
+      "resolved": "https://registry.npmmirror.com/csstype/-/csstype-3.2.3.tgz",
+      "integrity": "sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==",
+      "dev": true,
+      "license": "MIT"
+    },
+    "node_modules/detect-libc": {
+      "version": "2.1.2",
+      "resolved": "https://registry.npmmirror.com/detect-libc/-/detect-libc-2.1.2.tgz",
+      "integrity": "sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==",
+      "dev": true,
+      "license": "Apache-2.0",
+      "engines": {
+        "node": "&gt;=8"
+      }
+    },
+    "node_modules/fdir": {
+      "version": "6.5.0",
+      "resolved": "https://registry.npmmirror.com/fdir/-/fdir-6.5.0.tgz",
+      "integrity": "sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": "&gt;=12.0.0"
+      },
+      "peerDependencies": {
+        "picomatch": "^3 || ^4"
+      },
+      "peerDependenciesMeta": {
+        "picomatch": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/fsevents": {
+      "version": "2.3.3",
+      "resolved": "https://registry.npmmirror.com/fsevents/-/fsevents-2.3.3.tgz",
+      "integrity": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==",
+      "dev": true,
+      "hasInstallScript": true,
+      "license": "MIT",
+      "optional": true,
+      "os": [
+        "darwin"
+      ],
+      "engines": {
+        "node": "^8.16.0 || ^10.6.0 || &gt;=11.0.0"
+      }
+    },
+    "node_modules/lightningcss": {
+      "version": "1.33.0",
+      "resolved": "https://registry.npmmirror.com/lightningcss/-/lightningcss-1.33.0.tgz",
+      "integrity": "sha512-WkUDrojuJs0xkgGf2udWxa3yGBRxPtxUkB79i6aCZLRgc7PM8fZe9TosfPDcvEpQZbuFASnHYmRLBLUbmLOIIA==",
+      "dev": true,
+      "license": "MPL-2.0",
+      "dependencies": {
+        "detect-libc": "^2.0.3"
+      },
+      "engines": {
+        "node": "&gt;= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      },
+      "optionalDependencies": {
+        "lightningcss-android-arm64": "1.33.0",
+        "lightningcss-darwin-arm64": "1.33.0",
+        "lightningcss-darwin-x64": "1.33.0",
+        "lightningcss-freebsd-x64": "1.33.0",
+        "lightningcss-linux-arm-gnueabihf": "1.33.0",
+        "lightningcss-linux-arm64-gnu": "1.33.0",
+        "lightningcss-linux-arm64-musl": "1.33.0",
+        "lightningcss-linux-x64-gnu": "1.33.0",
+        "lightningcss-linux-x64-musl": "1.33.0",
+        "lightningcss-win32-arm64-msvc": "1.33.0",
+        "lightningcss-win32-x64-msvc": "1.33.0"
+      }
+    },
+    "node_modules/lightningcss-android-arm64": {
+      "version": "1.33.0",
+      "resolved": "https://registry.npmmirror.com/lightningcss-android-arm64/-/lightningcss-android-arm64-1.33.0.tgz",
+      "integrity": "sha512-gEpRTalKdosp4Bb8qWtc2iOgE5SeIHlpS1up9bFq2wAyYhl1UdTObYiHe98zEM9SQvSoqQZ1IQD0JNpg3Ml5pg==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "android"
+      ],
+      "engines": {
+        "node": "&gt;= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/lightningcss-darwin-arm64": {
+      "version": "1.33.0",
+      "resolved": "https://registry.npmmirror.com/lightningcss-darwin-arm64/-/lightningcss-darwin-arm64-1.33.0.tgz",
+      "integrity": "sha512-Sciaz8eenNTKn9b3t7+xr0ipTp9YxKQY4npwQ3mrRuL0BAVHBLyZxofhaKBAVtzmtRZ/zTyo0/to4B1uWG/Djg==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "darwin"
+      ],
+      "engines": {
+        "node": "&gt;= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/lightningcss-darwin-x64": {
+      "version": "1.33.0",
+      "resolved": "https://registry.npmmirror.com/lightningcss-darwin-x64/-/lightningcss-darwin-x64-1.33.0.tgz",
+      "integrity": "sha512-Z5UPAxzrjlWNNyGy6i65cJzzvgJ5D3T6wMvs+gWpY9d7qRhANrxqAp6LhxIgZhWEw18RfJTGcRxjuLIBr+m8XQ==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "darwin"
+      ],
+      "engines": {
+        "node": "&gt;= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/lightningcss-freebsd-x64": {
+      "version": "1.33.0",
+      "resolved": "https://registry.npmmirror.com/lightningcss-freebsd-x64/-/lightningcss-freebsd-x64-1.33.0.tgz",
+      "integrity": "sha512-QQM/Ti/hQajJwCY+RiWuCZ9sdtI/XQk7nDK5vC8kkdwixezOlDgvDx7+RT+QjK6FcFT4MpsuoBnHIo/O3StRRg==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "freebsd"
+      ],
+      "engines": {
+        "node": "&gt;= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/lightningcss-linux-arm-gnueabihf": {
+      "version": "1.33.0",
+      "resolved": "https://registry.npmmirror.com/lightningcss-linux-arm-gnueabihf/-/lightningcss-linux-arm-gnueabihf-1.33.0.tgz",
+      "integrity": "sha512-N7FVBe6iS24MlM6R/4RBTxGhQheZGs7tiQ9U32UtF75NzP5Q7xWPRqLBCKxlRQRk3rY1jCIPLzx7WzOhuUIRLQ==",
+      "cpu": [
+        "arm"
+      ],
+      "dev": true,
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "&gt;= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/lightningcss-linux-arm64-gnu": {
+      "version": "1.33.0",
+      "resolved": "https://registry.npmmirror.com/lightningcss-linux-arm64-gnu/-/lightningcss-linux-arm64-gnu-1.33.0.tgz",
+      "integrity": "sha512-j2v/itmy4HlNxlc6voKXYgBqNi0Ng2LShg4z7GufpEgs05P+2suBVyi9I6YHq5uoVFx9ETin3eCEhLVyXGQnKg==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "libc": [
+        "glibc"
+      ],
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "&gt;= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/lightningcss-linux-arm64-musl": {
+      "version": "1.33.0",
+      "resolved": "https://registry.npmmirror.com/lightningcss-linux-arm64-musl/-/lightningcss-linux-arm64-musl-1.33.0.tgz",
+      "integrity": "sha512-yiO5ROMuYQgXbC60yjZU5CYSFZGKXL0HFATXt9mHJn1+zW55oCtMI9NfcVhYLMFDL7gV7oBPon/EmMMGg2OvtQ==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "libc": [
+        "musl"
+      ],
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "&gt;= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/lightningcss-linux-x64-gnu": {
+      "version": "1.33.0",
+      "resolved": "https://registry.npmmirror.com/lightningcss-linux-x64-gnu/-/lightningcss-linux-x64-gnu-1.33.0.tgz",
+      "integrity": "sha512-ar+Ju7LmcN0Jo4FpL4hpFybwNG9/3A/Br5KW2n2jyODg3MEZXaDYADdemoNS+BDNfMgKvylJLj4S5tyRActuAg==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "libc": [
+        "glibc"
+      ],
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "&gt;= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/lightningcss-linux-x64-musl": {
+      "version": "1.33.0",
+      "resolved": "https://registry.npmmirror.com/lightningcss-linux-x64-musl/-/lightningcss-linux-x64-musl-1.33.0.tgz",
+      "integrity": "sha512-RYiYbkokw0trfKqqzfF55lginwEPrD3OJDfTuJzFs1MK6iFnDenaz1fqLLtX4ITG3OktJQXOeTaw1awrBAlZPw==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "libc": [
+        "musl"
+      ],
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "linux"
+      ],
+      "engines": {
+        "node": "&gt;= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/lightningcss-win32-arm64-msvc": {
+      "version": "1.33.0",
+      "resolved": "https://registry.npmmirror.com/lightningcss-win32-arm64-msvc/-/lightningcss-win32-arm64-msvc-1.33.0.tgz",
+      "integrity": "sha512-1K+MPfLSFVpphzpdbfkhlWk6wBrTObBzS2T6db10PNOZgR9GoVsAWzwNyuhUYYbTp23j+4RrncfujZ4uAzXvwA==",
+      "cpu": [
+        "arm64"
+      ],
+      "dev": true,
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": "&gt;= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/lightningcss-win32-x64-msvc": {
+      "version": "1.33.0",
+      "resolved": "https://registry.npmmirror.com/lightningcss-win32-x64-msvc/-/lightningcss-win32-x64-msvc-1.33.0.tgz",
+      "integrity": "sha512-OlEICDx/Xl0FqSp4bry8zFnCvGpig3Gl4gCquvYwHuqJKEC1+n9NgDniFvqHGmMv1ZkqDJrDqKKSykTDX+ehuA==",
+      "cpu": [
+        "x64"
+      ],
+      "dev": true,
+      "license": "MPL-2.0",
+      "optional": true,
+      "os": [
+        "win32"
+      ],
+      "engines": {
+        "node": "&gt;= 12.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/parcel"
+      }
+    },
+    "node_modules/nanoid": {
+      "version": "3.3.18",
+      "resolved": "https://registry.npmmirror.com/nanoid/-/nanoid-3.3.18.tgz",
+      "integrity": "sha512-DTg4MJbGMWkfi6VZFdNt2/caMbQy4Ou+Op/hJQvGEWcnVfoA1QA+xzRKAzw9jD6+GVOOeYr/mIcuDSdug6F6+w==",
+      "dev": true,
+      "funding": [
+        {
+          "type": "github",
+          "url": "https://github.com/sponsors/ai"
+        }
+      ],
+      "license": "MIT",
+      "bin": {
+        "nanoid": "bin/nanoid.cjs"
+      },
+      "engines": {
+        "node": "^10 || ^12 || ^13.7 || ^14 || &gt;=15.0.1"
+      }
+    },
+    "node_modules/oxlint": {
+      "version": "1.78.0",
+      "resolved": "https://registry.npmmirror.com/oxlint/-/oxlint-1.78.0.tgz",
+      "integrity": "sha512-QgQePuxIqKOzo1KSjG2EnITEeWvWnKAm77eq8nrMtf6AGoA+zyGc4PFYtDNJSD25g/ibOwfQ851hZ4/SPkMVoA==",
+      "dev": true,
+      "license": "MIT",
+      "bin": {
+        "oxlint": "bin/oxlint"
+      },
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/Boshen"
+      },
+      "optionalDependencies": {
+        "@oxlint/binding-android-arm-eabi": "1.78.0",
+        "@oxlint/binding-android-arm64": "1.78.0",
+        "@oxlint/binding-darwin-arm64": "1.78.0",
+        "@oxlint/binding-darwin-x64": "1.78.0",
+        "@oxlint/binding-freebsd-x64": "1.78.0",
+        "@oxlint/binding-linux-arm-gnueabihf": "1.78.0",
+        "@oxlint/binding-linux-arm-musleabihf": "1.78.0",
+        "@oxlint/binding-linux-arm64-gnu": "1.78.0",
+        "@oxlint/binding-linux-arm64-musl": "1.78.0",
+        "@oxlint/binding-linux-ppc64-gnu": "1.78.0",
+        "@oxlint/binding-linux-riscv64-gnu": "1.78.0",
+        "@oxlint/binding-linux-riscv64-musl": "1.78.0",
+        "@oxlint/binding-linux-s390x-gnu": "1.78.0",
+        "@oxlint/binding-linux-x64-gnu": "1.78.0",
+        "@oxlint/binding-linux-x64-musl": "1.78.0",
+        "@oxlint/binding-openharmony-arm64": "1.78.0",
+        "@oxlint/binding-win32-arm64-msvc": "1.78.0",
+        "@oxlint/binding-win32-ia32-msvc": "1.78.0",
+        "@oxlint/binding-win32-x64-msvc": "1.78.0"
+      },
+      "peerDependencies": {
+        "oxlint-tsgolint": "&gt;=7.0.2001",
+        "vite-plus": "*"
+      },
+      "peerDependenciesMeta": {
+        "oxlint-tsgolint": {
+          "optional": true
+        },
+        "vite-plus": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/picocolors": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmmirror.com/picocolors/-/picocolors-1.1.1.tgz",
+      "integrity": "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==",
+      "dev": true,
+      "license": "ISC"
+    },
+    "node_modules/picomatch": {
+      "version": "4.0.5",
+      "resolved": "https://registry.npmmirror.com/picomatch/-/picomatch-4.0.5.tgz",
+      "integrity": "sha512-RvwwcruNjI1ncT5xRakeyS9Lf8lcItv34KD+aif+VH9kduAyfYBipGh12274xtenIPZ119/R9BdTBa8gAwSh0A==",
+      "dev": true,
+      "license": "MIT",
+      "engines": {
+        "node": "&gt;=12"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/jonschlinkert"
+      }
+    },
+    "node_modules/postcss": {
+      "version": "8.5.26",
+      "resolved": "https://registry.npmmirror.com/postcss/-/postcss-8.5.26.tgz",
+      "integrity": "sha512-u82N74LFzG8ca+dD8puPnplTXoGH4fTPpVGuIbt36G3qvNlkvfD0lEAZSxaly3KX8TS/L1A1gsCEmvKmBcVbkQ==",
+      "dev": true,
+      "funding": [
+        {
+          "type": "opencollective",
+          "url": "https://opencollective.com/postcss/"
+        },
+        {
+          "type": "tidelift",
+          "url": "https://tidelift.com/funding/github/npm/postcss"
+        },
+        {
+          "type": "github",
+          "url": "https://github.com/sponsors/ai"
+        }
+      ],
+      "license": "MIT",
+      "dependencies": {
+        "nanoid": "^3.3.17",
+        "picocolors": "^1.1.1",
+        "source-map-js": "^1.2.1"
+      },
+      "engines": {
+        "node": "^10 || ^12 || &gt;=14"
+      }
+    },
+    "node_modules/react": {
+      "version": "19.2.8",
+      "resolved": "https://registry.npmmirror.com/react/-/react-19.2.8.tgz",
+      "integrity": "sha512-PWaYA1L/q9u2u7xYQi+Y3L3Yfnie7XyLeaJICV1MGD6LprsBxcAqGjYyr0eY3p+QdsA+x/Irkt4Qif8D63+Sbw==",
+      "license": "MIT",
+      "engines": {
+        "node": "&gt;=0.10.0"
+      }
+    },
+    "node_modules/react-dom": {
+      "version": "19.2.8",
+      "resolved": "https://registry.npmmirror.com/react-dom/-/react-dom-19.2.8.tgz",
+      "integrity": "sha512-rVprimfGBG3DR+Tq0IQG2DT5PxKth1WIGDmj5yPmlzr4YBe7uyE+Du4oVqTDXZSHGGGXRtTJEGSSePyQCMBglQ==",
+      "license": "MIT",
+      "dependencies": {
+        "scheduler": "^0.27.0"
+      },
+      "peerDependencies": {
+        "react": "^19.2.8"
+      }
+    },
+    "node_modules/rolldown": {
+      "version": "1.2.4",
+      "resolved": "https://registry.npmmirror.com/rolldown/-/rolldown-1.2.4.tgz",
+      "integrity": "sha512-rSr7irW0K7QRWzjdJXqZowkcRdDtjRduh43rBltnVKd0VFq839l1lJoDvGJb6gl7+4rTTCrPWu+YfujUL8Ug7w==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "@oxc-project/types": "=0.144.0",
+        "@rolldown/pluginutils": "^1.0.0"
+      },
+      "bin": {
+        "rolldown": "bin/cli.mjs"
+      },
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      },
+      "optionalDependencies": {
+        "@rolldown/binding-android-arm64": "1.2.4",
+        "@rolldown/binding-darwin-arm64": "1.2.4",
+        "@rolldown/binding-darwin-x64": "1.2.4",
+        "@rolldown/binding-freebsd-x64": "1.2.4",
+        "@rolldown/binding-linux-arm-gnueabihf": "1.2.4",
+        "@rolldown/binding-linux-arm64-gnu": "1.2.4",
+        "@rolldown/binding-linux-arm64-musl": "1.2.4",
+        "@rolldown/binding-linux-ppc64-gnu": "1.2.4",
+        "@rolldown/binding-linux-s390x-gnu": "1.2.4",
+        "@rolldown/binding-linux-x64-gnu": "1.2.4",
+        "@rolldown/binding-linux-x64-musl": "1.2.4",
+        "@rolldown/binding-openharmony-arm64": "1.2.4",
+        "@rolldown/binding-win32-arm64-msvc": "1.2.4",
+        "@rolldown/binding-win32-x64-msvc": "1.2.4"
+      }
+    },
+    "node_modules/scheduler": {
+      "version": "0.27.0",
+      "resolved": "https://registry.npmmirror.com/scheduler/-/scheduler-0.27.0.tgz",
+      "integrity": "sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q==",
+      "license": "MIT"
+    },
+    "node_modules/source-map-js": {
+      "version": "1.2.1",
+      "resolved": "https://registry.npmmirror.com/source-map-js/-/source-map-js-1.2.1.tgz",
+      "integrity": "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==",
+      "dev": true,
+      "license": "BSD-3-Clause",
+      "engines": {
+        "node": "&gt;=0.10.0"
+      }
+    },
+    "node_modules/tinyglobby": {
+      "version": "0.2.17",
+      "resolved": "https://registry.npmmirror.com/tinyglobby/-/tinyglobby-0.2.17.tgz",
+      "integrity": "sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "fdir": "^6.5.0",
+        "picomatch": "^4.0.4"
+      },
+      "engines": {
+        "node": "&gt;=12.0.0"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/SuperchupuDev"
+      }
+    },
+    "node_modules/typescript": {
+      "version": "6.0.3",
+      "resolved": "https://registry.npmmirror.com/typescript/-/typescript-6.0.3.tgz",
+      "integrity": "sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==",
+      "dev": true,
+      "license": "Apache-2.0",
+      "bin": {
+        "tsc": "bin/tsc",
+        "tsserver": "bin/tsserver"
+      },
+      "engines": {
+        "node": "&gt;=14.17"
+      }
+    },
+    "node_modules/vite": {
+      "version": "8.2.1",
+      "resolved": "https://registry.npmmirror.com/vite/-/vite-8.2.1.tgz",
+      "integrity": "sha512-EU/eS7BH3XROHh2YnBefjM6DBKA6ZeMZEYQbj7NLWg5wHYlhB8B/Mayd5XsgWq+NFYccDOTemRpdETWR6Ka/lw==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "lightningcss": "^1.33.0",
+        "picomatch": "^4.0.5",
+        "postcss": "^8.5.25",
+        "rolldown": "~1.2.1",
+        "tinyglobby": "^0.2.17"
+      },
+      "bin": {
+        "vite": "bin/vite.js"
+      },
+      "engines": {
+        "node": "^20.19.0 || &gt;=22.12.0"
+      },
+      "funding": {
+        "url": "https://github.com/vitejs/vite?sponsor=1"
+      },
+      "optionalDependencies": {
+        "fsevents": "~2.3.3"
+      },
+      "peerDependencies": {
+        "@types/node": "^20.19.0 || &gt;=22.12.0",
+        "@vitejs/devtools": "^0.4.0",
+        "esbuild": "^0.27.0 || ^0.28.0",
+        "jiti": "&gt;=1.21.0",
+        "less": "^4.0.0",
+        "sass": "^1.70.0",
+        "sass-embedded": "^1.70.0",
+        "stylus": "&gt;=0.54.8",
+        "sugarss": "^5.0.0",
+        "terser": "^5.16.0",
+        "tsx": "^4.8.1",
+        "yaml": "^2.4.2"
+      },
+      "peerDependenciesMeta": {
+        "@types/node": {
+          "optional": true
+        },
+        "@vitejs/devtools": {
+          "optional": true
+        },
+        "esbuild": {
+          "optional": true
+        },
+        "jiti": {
+          "optional": true
+        },
+        "less": {
+          "optional": true
+        },
+        "sass": {
+          "optional": true
+        },
+        "sass-embedded": {
+          "optional": true
+        },
+        "stylus": {
+          "optional": true
+        },
+        "sugarss": {
+          "optional": true
+        },
+        "terser": {
+          "optional": true
+        },
+        "tsx": {
+          "optional": true
+        },
+        "yaml": {
+          "optional": true
+        }
+      }
+    }
+  }
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">vite.config.ts</span><span class="fmeta">15 行 · 428 B</span></summary>
+    <pre class="code"><code>import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  // GitHub Pages 部署：使用相对路径，保证子目录下资源也能正常加载
+  base: "./",
+  plugins: [react()],
+  server: {
+    watch: {
+      // opencv.js 体积很大且不需要热更新，避免文件监视导致崩溃
+      ignored: ["**/public/opencv/**"],
+    },
+  },
+})</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">tsconfig.json</span><span class="fmeta">8 行 · 120 B</span></summary>
+    <pre class="code"><code>{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">tsconfig.app.json</span><span class="fmeta">27 行 · 656 B</span></summary>
+    <pre class="code"><code>{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "esnext",
+    "types": ["vite/client"],
+    "allowArbitraryExtensions": true,
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">tsconfig.node.json</span><span class="fmeta">24 行 · 538 B</span></summary>
+    <pre class="code"><code>{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "es2023",
+    "lib": ["ES2023"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "module": "nodenext",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["vite.config.ts"]
+}
+
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">.gitignore</span><span class="fmeta">26 行 · 215 B</span></summary>
+    <pre class="code"><code># Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+
+# Env
+.env
+.env.*
+
+# Windows
+Thumbs.db
+Desktop.ini
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">.npmrc</span><span class="fmeta">2 行 · 41 B</span></summary>
+    <pre class="code"><code>registry=https://registry.npmmirror.com
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">.gitattributes</span><span class="fmeta">9 行 · 138 B</span></summary>
+    <pre class="code"><code>* text=auto
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">index.html</span><span class="fmeta">15 行 · 488 B</span></summary>
+    <pre class="code"><code>&lt;!doctype html&gt;
+&lt;html lang="zh-CN"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;link rel="icon" type="image/svg+xml" href="/favicon.svg" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;meta name="description" content="周颖乐的个人简历网站：主修医学，辅修 AI 编程" /&gt;
+    &lt;title&gt;周颖乐 · 个人简历&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+    &lt;script type="module" src="/src/main.tsx"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">.github/workflows/deploy.yml</span><span class="fmeta">39 行 · 718 B</span></summary>
+    <pre class="code"><code>name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/main.tsx</span><span class="fmeta">11 行 · 231 B</span></summary>
+    <pre class="code"><code>import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.tsx'
+
+createRoot(document.getElementById('root')!).render(
+  &lt;StrictMode&gt;
+    &lt;App /&gt;
+  &lt;/StrictMode&gt;,
+)
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/App.tsx</span><span class="fmeta">70 行 · 2.2 KB</span></summary>
+    <pre class="code"><code>import { useState } from "react";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Stats from "./components/Stats";
+import CertificateWall from "./components/CertificateWall";
+import Experience from "./components/Experience";
+import Hobbies from "./components/Hobbies";
+import Strengths from "./components/Strengths";
+import Projects from "./components/Projects";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import MusicPlayer from "./components/MusicPlayer";
+import BootScreen from "./components/BootScreen";
+import Toasts from "./components/Toasts";
+import SnakeGame from "./projects/SnakeGame";
+import CrawlerDemo from "./projects/CrawlerDemo";
+import VisionDemo from "./projects/VisionDemo";
+import "./App.css";
+
+/** 页面视图：首页 / 贪吃蛇 / 爬虫 / 视觉识别 */
+export type View = "home" | "snake" | "crawler" | "vision";
+
+function App() {
+  const [view, setView] = useState&lt;View&gt;("home");
+  // 开机动画：每个浏览器会话只显示一次
+  const [showBoot, setShowBoot] = useState(() =&gt; sessionStorage.getItem("booted") !== "1");
+
+  /** 跳转到首页某个板块 */
+  const goSection = (id: string) =&gt; {
+    if (view !== "home") {
+      setView("home");
+      setTimeout(() =&gt; document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 90);
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  return (
+    &lt;&gt;
+      {showBoot &amp;&amp; &lt;BootScreen onDone={() =&gt; setShowBoot(false)} /&gt;}
+
+      &lt;Navbar view={view} onNavigate={setView} /&gt;
+
+      {view === "home" &amp;&amp; (
+        &lt;main&gt;
+          &lt;Hero onOpen={setView} onNavigate={goSection} /&gt;
+          &lt;About /&gt;
+          &lt;Stats /&gt;
+          &lt;CertificateWall /&gt;
+          &lt;Experience /&gt;
+          &lt;Hobbies /&gt;
+          &lt;Strengths /&gt;
+          &lt;Projects onOpen={setView} /&gt;
+          &lt;Contact /&gt;
+          &lt;Footer /&gt;
+        &lt;/main&gt;
+      )}
+
+      {view === "snake" &amp;&amp; &lt;SnakeGame onBack={() =&gt; setView("home")} /&gt;}
+      {view === "crawler" &amp;&amp; &lt;CrawlerDemo onBack={() =&gt; setView("home")} /&gt;}
+      {view === "vision" &amp;&amp; &lt;VisionDemo onBack={() =&gt; setView("home")} /&gt;}
+
+      &lt;MusicPlayer /&gt;
+      &lt;Toasts /&gt;
+    &lt;/&gt;
+  );
+}
+
+export default App;</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/App.css</span><span class="fmeta">1118 行 · 22.5 KB</span></summary>
+    <pre class="code"><code>/* ============================================================
+   页面样式：导航 / 首屏 / 板块 / 卡片 / 项目页 / 音乐播放器
+   ============================================================ */
+
+/* ---------- 导航栏 ---------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(1rem, 4vw, 2.5rem);
+  background: rgba(7, 11, 18, 0.82);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+}
+
+.brand {
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 1.1rem;
+  text-shadow: 0 0 12px rgba(0, 255, 209, 0.5);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: var(--muted);
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(0, 255, 209, 0.6);
+}
+
+.menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-btn span {
+  width: 18px;
+  height: 2px;
+  background: var(--text);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-btn.open span:nth-child(2) { opacity: 0; }
+.menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- 首屏 ---------- */
+.hero {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 110px 1.5rem 60px;
+  text-align: center;
+}
+
+.hero-inner {
+  max-width: 760px;
+}
+
+.hero-terminal {
+  font-family: var(--mono);
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.hero-name {
+  margin: 0;
+  font-size: clamp(2.8rem, 9vw, 5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+  text-shadow: 0 0 30px rgba(0, 255, 209, 0.45), 0 0 60px rgba(77, 124, 255, 0.3);
+}
+
+.hero-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.hero-avatar {
+  width: clamp(72px, 14vw, 120px);
+  height: clamp(72px, 14vw, 120px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 24px rgba(0, 255, 209, 0.35);
+  background: #04120e;
+}
+.hero-title {
+  margin: 1.1rem 0 0.3rem;
+  font-family: var(--mono);
+  font-size: clamp(1.05rem, 3vw, 1.4rem);
+  color: var(--accent);
+  text-shadow: 0 0 14px rgba(0, 255, 209, 0.5);
+}
+
+.hero-tagline {
+  margin: 0.4rem auto 2rem;
+  max-width: 560px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.72rem 1.6rem;
+  border-radius: 8px;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #04120e;
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(0, 255, 209, 0.35);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 34px rgba(0, 255, 209, 0.55);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--accent);
+}
+
+.btn-ghost:hover {
+  background: var(--accent-dim);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--danger);
+  border-color: rgba(255, 77, 109, 0.5);
+}
+
+/* ---------- 通用板块 ---------- */
+.section {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem;
+}
+
+.section-label {
+  font-family: var(--mono);
+  color: var(--accent);
+  font-size: 0.9rem;
+  margin: 0 0 0.4rem;
+  text-shadow: 0 0 10px rgba(0, 255, 209, 0.4);
+}
+
+.section-title {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  font-weight: 800;
+  color: #fff;
+}
+
+.section-sub {
+  margin: 0 0 2.4rem;
+  color: var(--muted);
+}
+
+/* ---------- 卡片 ---------- */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 255, 209, 0.4);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45), 0 0 24px rgba(0, 255, 209, 0.08);
+}
+
+.card-title {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.card-title::before {
+  content: "&gt; ";
+  color: var(--accent);
+  font-family: var(--mono);
+}
+
+/* ---------- 个人简历 ---------- */
+.resume-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.1rem;
+}
+
+.info-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.info-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.info-list li:last-child { border-bottom: none; }
+.info-list li span { color: var(--muted); font-family: var(--mono); font-size: 0.88rem; }
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  padding: 0.32rem 0.8rem;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  border: 1px solid rgba(0, 255, 209, 0.35);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.item-title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.item-sub {
+  margin: 0.15rem 0 0.4rem;
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.item-desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+.period {
+  float: right;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 400;
+}
+
+.edu-item + .edu-item { margin-top: 1rem; }
+
+/* ---------- 个人经历（时间线） ---------- */
+.timeline {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(var(--accent), var(--accent-2), transparent);
+}
+
+.timeline-item { position: relative; margin-bottom: 1.3rem; }
+
+.timeline-dot {
+  position: absolute;
+  left: -1.5rem;
+  top: 1.35rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-dim), 0 0 14px rgba(0, 255, 209, 0.6);
+}
+
+/* ---------- 项目作品 ---------- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.1rem;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-name { margin: 0 0 0.6rem; font-size: 1.1rem; font-weight: 700; color: #fff; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.7rem 0 1.1rem; }
+.project-link { margin-top: auto; font-family: var(--mono); font-size: 0.9rem; }
+.project-link:hover { text-shadow: 0 0 8px rgba(0, 255, 209, 0.6); }
+
+.open-btn {
+  margin-top: auto;
+  padding: 0.55rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.open-btn:hover {
+  background: var(--accent-dim);
+  box-shadow: 0 0 18px rgba(0, 255, 209, 0.3);
+}
+
+/* ---------- 联系我 ---------- */
+.contact { max-width: 720px; }
+.contact-card { text-align: center; }
+.contact-card .item-title { margin: 0.4rem 0; }
+
+/* ---------- 页脚 ---------- */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 1.8rem 1.5rem;
+  text-align: center;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+/* ---------- 项目子页面通用 ---------- */
+.page {
+  min-height: 100vh;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 96px 1.5rem 3rem;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.6rem;
+  flex-wrap: wrap;
+}
+
+.page-title {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  color: #fff;
+}
+
+.page-title::before {
+  content: "&gt; ";
+  color: var(--accent);
+  font-family: var(--mono);
+}
+
+.back-btn {
+  padding: 0.5rem 1.1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--mono);
+  cursor: pointer;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.back-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+.note-box {
+  border: 1px dashed rgba(77, 124, 255, 0.5);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 1rem 0;
+  background: rgba(77, 124, 255, 0.06);
+}
+
+/* ---------- 贪吃蛇 ---------- */
+.snake-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.snake-canvas {
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0, 255, 209, 0.25);
+  background: #05080f;
+  max-width: 100%;
+  height: auto;
+}
+
+.snake-info {
+  display: flex;
+  gap: 2rem;
+  font-family: var(--mono);
+}
+
+.snake-info b { color: var(--accent); font-size: 1.3rem; }
+
+.snake-controls { display: flex; gap: 0.7rem; flex-wrap: wrap; justify-content: center; }
+
+.snake-hint { color: var(--muted); font-size: 0.9rem; text-align: center; }
+
+/* ---------- 爬虫演示 ---------- */
+.crawler-wrap { display: flex; flex-direction: column; gap: 1.2rem; }
+
+.crawler-input-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.crawler-input-row input {
+  flex: 1;
+  min-width: 220px;
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.crawler-input-row input:focus { border-color: var(--accent); box-shadow: 0 0 12px rgba(0, 255, 209, 0.2); }
+
+.crawler-log {
+  background: #04070d;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  min-height: 90px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.result-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.9rem;
+}
+
+.result-item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.result-item:hover { border-color: rgba(0, 255, 209, 0.4); transform: translateY(-3px); }
+
+.result-item h4 { margin: 0 0 0.3rem; font-size: 1rem; color: #fff; }
+.result-item p { margin: 0.15rem 0; color: var(--muted); font-size: 0.85rem; }
+
+/* ---------- 音乐播放器 ---------- */
+.music-player {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.music-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  width: 240px;
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.music-panel.open { display: flex; }
+
+.music-title {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.music-sub { font-size: 0.78rem; color: var(--muted); }
+
+.music-volume-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.music-volume-row input[type="range"] {
+  flex: 1;
+  accent-color: var(--accent);
+}
+
+.music-tip {
+  font-size: 0.75rem;
+  color: var(--danger);
+}
+
+.music-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  background: var(--panel);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 22px rgba(0, 255, 209, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.music-btn:hover { transform: scale(1.08); box-shadow: 0 0 30px rgba(0, 255, 209, 0.55); }
+
+.music-disc {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: radial-gradient(circle, #04120e 0 35%, var(--accent) 36% 40%, #04120e 41% 100%);
+  animation: spin 4s linear infinite;
+}
+
+.music-disc.paused { animation-play-state: paused; }
+
+/* ---------- 手机端适配 ---------- */
+@media (max-width: 720px) {
+  .nav-links {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(7, 11, 18, 0.97);
+    border-bottom: 1px solid var(--border);
+    transform: translateY(-130%);
+    transition: transform 0.3s ease;
+    padding: 0.4rem 0;
+  }
+  .nav-links.open { transform: translateY(0); }
+  .nav-links a { padding: 0.8rem clamp(1rem, 4vw, 2.5rem); }
+  .menu-btn { display: flex; }
+  .section { padding: 3.2rem 1.2rem; }
+}
+
+.music-panel-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.music-panel-btn:hover {
+  transform: scale(1.08);
+  border-color: var(--accent);
+}
+
+/* ============================================================
+   新交互样式：开机动画 / 交互终端 / toast / 挑战卡片 / 成就条
+   ============================================================ */
+
+/* ---------- 开机终端动画 ---------- */
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: #04070d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.boot-box {
+  width: min(560px, 90vw);
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(0, 255, 209, 0.5);
+}
+
+.boot-line { margin: 0.3rem 0; }
+.boot-prompt { margin-top: 1.2rem; color: var(--text); }
+
+/* ---------- 交互终端 ---------- */
+.terminal {
+  margin: 2rem auto 0;
+  max-width: 640px;
+  text-align: left;
+  background: #04070d;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 255, 209, 0.08);
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.55rem 0.9rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-r { background: #ff5f57; }
+.dot-y { background: #febc2e; }
+.dot-g { background: #28c840; }
+
+.terminal-title {
+  margin-left: 8px;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.terminal-body {
+  padding: 0.8rem 0.9rem;
+  min-height: 140px;
+  max-height: 240px;
+  overflow-y: auto;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.terminal-line { margin: 0.15rem 0; white-space: pre-wrap; word-break: break-all; }
+.terminal-line.cmd { color: var(--text); }
+.terminal-line.ok { color: var(--accent); }
+.terminal-line.err { color: var(--danger); }
+.terminal-line.out { color: var(--muted); }
+
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding: 0.55rem 0.9rem;
+}
+
+.terminal-prompt { font-family: var(--mono); color: var(--accent); font-weight: 700; }
+
+.terminal-input-row input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+}
+
+/* ---------- toast 消息 ---------- */
+.toasts {
+  position: fixed;
+  top: 72px;
+  right: 16px;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 320px;
+}
+
+.toast {
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  animation: toastIn 0.3s ease;
+}
+
+.toast-success { border-color: var(--accent); color: var(--accent); }
+.toast-error { border-color: var(--danger); color: var(--danger); }
+.toast-info { border-color: var(--accent-2); color: #a8c0ff; }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ---------- 挑战式项目卡片 ---------- */
+.challenge-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.challenge-cat {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 5px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid rgba(0, 255, 209, 0.3);
+}
+
+.challenge-points {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-2);
+  text-shadow: 0 0 12px rgba(77, 124, 255, 0.6);
+}
+
+.challenge-diff {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0.4rem 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.diff-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #27354a;
+}
+
+.diff-dot.on { background: var(--accent); box-shadow: 0 0 8px rgba(0, 255, 209, 0.7); }
+
+.diff-label {
+  margin-left: 6px;
+  text-transform: uppercase;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+.challenge-hint { color: var(--muted); font-size: 0.85rem; margin: 0.6rem 0; }
+
+.flag-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+.flag-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.55rem 0.7rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #04070d;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.flag-row input:focus { border-color: var(--accent); }
+.flag-row input:disabled { opacity: 0.5; }
+.flag-btn { padding: 0.5rem 0.9rem; font-size: 0.85rem; }
+
+.flag-found {
+  font-family: var(--mono);
+  color: var(--accent);
+  border: 1px dashed rgba(0, 255, 209, 0.5);
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+  background: var(--accent-dim);
+}
+
+/* ---------- 成就数据条 ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1.5rem 1rem;
+}
+
+.stat {
+  text-align: center;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.2rem 0.8rem;
+}
+
+.stat-num {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  text-shadow: 0 0 16px rgba(0, 255, 209, 0.45);
+}
+
+.stat-label { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.85rem; }
+/* ============================================================
+   视觉识别项目（人脸识别 / 动作捕捉 / 手势识别）
+   ============================================================ */
+
+.vision-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.vision-modes {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.vision-stage {
+  position: relative;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #04070d;
+  min-height: 320px;
+}
+
+.vision-video {
+  display: none;
+}
+
+.vision-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.vision-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-family: var(--mono);
+  padding: 1rem;
+  text-align: center;
+}
+
+.vision-fps {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  background: rgba(0, 0, 0, 0.55);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.vision-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.vision-status {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+  min-height: 1.4em;
+}
+/* ============================================================
+   技能说明区块
+   ============================================================ */
+
+.skills-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.1rem;
+}
+
+.skill-show-card {
+  overflow: hidden;
+  padding: 0;
+}
+
+.skill-show-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--border);
+  background: #04070d;
+}
+
+.skill-show-body {
+  padding: 1rem 1.2rem 1.3rem;
+}
+
+.skill-show-body h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.skill-show-body h3::before {
+  content: "&gt; ";
+  color: var(--accent);
+  font-family: var(--mono);
+}
+
+.skill-show-body p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.skill-img-fallback {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  background: #04070d;
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem;
+}
+/* ============================================================
+   证书墙
+   ============================================================ */
+
+.cert-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.cert-frame {
+  background: #f5f2e9;
+  padding: 10px 10px 8px;
+  border-radius: 6px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cert-frame:hover {
+  transform: rotate(0deg) scale(1.04) !important;
+  box-shadow: 0 18px 44px rgba(0, 255, 209, 0.18);
+  z-index: 2;
+}
+
+.cert-frame img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+  background: #fff;
+  border-radius: 2px;
+}
+
+.cert-name {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1f2937;
+  text-align: center;
+}
+
+.cert-date {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: #6b7280;
+  text-align: center;
+  font-family: var(--mono);
+}
+
+.cert-fallback {
+  width: 100%;
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  background: #04070d;
+  text-align: center;
+  padding: 0.5rem;
+}
+/* ============================================================
+   兴趣爱好 / 个人特长
+   ============================================================ */
+
+.interest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.1rem;
+}
+
+.interest-card {
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+.interest-icon {
+  display: block;
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.interest-name {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.interest-name::before {
+  content: "&gt; ";
+  color: var(--accent);
+  font-family: var(--mono);
+}
+
+.interest-card .item-desc {
+  margin: 0;
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/index.css</span><span class="fmeta">108 行 · 2.2 KB</span></summary>
+    <pre class="code"><code>/* ============================================================
+   全局样式：深色科技风（仿 CTF 平台风格）
+   ============================================================ */
+
+:root {
+  --bg: #070b12;
+  --panel: #0c1420;
+  --panel-2: #101a2b;
+  --border: #1e2c40;
+  --text: #c9d6e3;
+  --muted: #7d8ba0;
+  --accent: #00ffd1;
+  --accent-dim: rgba(0, 255, 209, 0.12);
+  --accent-2: #4d7cff;
+  --danger: #ff4d6d;
+  --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* 网格背景 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image:
+    linear-gradient(rgba(0, 255, 209, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 209, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* 顶部光晕 */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(600px 300px at 50% 0%, rgba(77, 124, 255, 0.16), transparent 70%),
+    radial-gradient(500px 300px at 88% 18%, rgba(0, 255, 209, 0.07), transparent 70%);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-shadow: 0 0 8px rgba(0, 255, 209, 0.6);
+}
+
+/* 滚动渐入动画 */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 终端闪烁光标 */
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 1.1em;
+  background: var(--accent);
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+
+/* 唱片旋转 */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/About.tsx</span><span class="fmeta">51 行 · 1.8 KB</span></summary>
+    <pre class="code"><code>import { profile } from "../data/profile";
+import Reveal from "./Reveal";
+
+/** 个人简历：基本信息 / 技能 / 教育 / 简介 */
+export default function About() {
+  return (
+    &lt;section id="about" className="section"&gt;
+      &lt;Reveal&gt;
+        &lt;p className="section-label"&gt;{"$ cat about.md"}&lt;/p&gt;
+        &lt;h2 className="section-title"&gt;个人简历&lt;/h2&gt;
+        &lt;p className="section-sub"&gt;基本信息 · 专业技能 · 教育经历&lt;/p&gt;
+      &lt;/Reveal&gt;
+
+      &lt;div className="resume-grid"&gt;
+        &lt;Reveal className="card"&gt;
+          &lt;h3 className="card-title"&gt;基本信息&lt;/h3&gt;
+          &lt;ul className="info-list"&gt;
+            &lt;li&gt;&lt;span&gt;姓名&lt;/span&gt;{profile.name}&lt;/li&gt;
+            &lt;li&gt;&lt;span&gt;身份&lt;/span&gt;{profile.title}&lt;/li&gt;
+            &lt;li&gt;&lt;span&gt;城市&lt;/span&gt;{profile.location}&lt;/li&gt;
+            &lt;li&gt;&lt;span&gt;邮箱&lt;/span&gt;&lt;a href={"mailto:" + profile.email}&gt;{profile.email}&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/Reveal&gt;
+
+        &lt;Reveal className="card"&gt;
+          &lt;h3 className="card-title"&gt;专业技能&lt;/h3&gt;
+          &lt;div className="skills"&gt;
+            {profile.skills.map((s) =&gt; &lt;span key={s} className="skill-tag"&gt;{s}&lt;/span&gt;)}
+          &lt;/div&gt;
+        &lt;/Reveal&gt;
+
+        &lt;Reveal className="card"&gt;
+          &lt;h3 className="card-title"&gt;教育经历&lt;/h3&gt;
+          {profile.education.map((e) =&gt; (
+            &lt;div key={e.school} className="edu-item"&gt;
+              &lt;p className="item-title"&gt;{e.school} &lt;span className="period"&gt;{e.period}&lt;/span&gt;&lt;/p&gt;
+              &lt;p className="item-sub"&gt;{e.degree}&lt;/p&gt;
+              &lt;p className="item-desc"&gt;{e.desc}&lt;/p&gt;
+            &lt;/div&gt;
+          ))}
+        &lt;/Reveal&gt;
+
+        &lt;Reveal className="card"&gt;
+          &lt;h3 className="card-title"&gt;个人简介&lt;/h3&gt;
+          &lt;p className="item-desc"&gt;{profile.intro}&lt;/p&gt;
+        &lt;/Reveal&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  );
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/BootScreen.tsx</span><span class="fmeta">46 行 · 1.2 KB</span></summary>
+    <pre class="code"><code>﻿import { useEffect, useState } from "react";
+
+const LINES = [
+  "Cyber Terminal v2.0.1",
+  "&gt; 正在加载系统模块 ...",
+  "&gt; 载入个人档案：周颖乐",
+  "&gt; 挂载服务：snake / crawler / music",
+  "&gt; 系统就绪。",
+];
+
+/** 开机终端动画（每个浏览器会话显示一次，点击任意处进入） */
+export default function BootScreen({ onDone }: { onDone: () =&gt; void }) {
+  const [count, setCount] = useState(0);
+  const [prompt, setPrompt] = useState(false);
+
+  useEffect(() =&gt; {
+    let i = 0;
+    const timer = setInterval(() =&gt; {
+      i++;
+      setCount(i);
+      if (i &gt;= LINES.length) {
+        clearInterval(timer);
+        setPrompt(true);
+      }
+    }, 380);
+    return () =&gt; clearInterval(timer);
+  }, []);
+
+  const enter = () =&gt; onDone();
+
+  return (
+    &lt;div className="boot" onClick={enter} role="button" aria-label="点击进入"&gt;
+      &lt;div className="boot-box"&gt;
+        {LINES.slice(0, count).map((l, i) =&gt; (
+          &lt;p key={i} className="boot-line"&gt;{l}&lt;/p&gt;
+        ))}
+        {prompt &amp;&amp; (
+          &lt;p className="boot-prompt"&gt;
+            按任意键或点击进入 &lt;span className="cursor" /&gt;
+          &lt;/p&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/CertificateWall.tsx</span><span class="fmeta">46 行 · 1.5 KB</span></summary>
+    <pre class="code"><code>import { useState } from "react";
+import { certificates, type CertificateItem } from "../data/certificates";
+import Reveal from "./Reveal";
+
+/** 每张证书的轻微倾斜角度，营造照片墙的感觉 */
+const TILTS = [-2, 1.6, -1.2, 2.2];
+
+function CertCard({ item, index }: { item: CertificateItem; index: number }) {
+  const [imgOk, setImgOk] = useState(true);
+  const tilt = TILTS[index % TILTS.length];
+  return (
+    &lt;div className="cert-frame" style={{ transform: "rotate(" + tilt + "deg)" }}&gt;
+      {imgOk ? (
+        &lt;img src={item.image} alt={item.title} loading="lazy" onError={() =&gt; setImgOk(false)} /&gt;
+      ) : (
+        &lt;div className="cert-fallback"&gt;
+          &lt;span&gt;🖼️ 图片未找到&lt;/span&gt;
+          &lt;span&gt;{item.image}&lt;/span&gt;
+        &lt;/div&gt;
+      )}
+      &lt;p className="cert-name"&gt;{item.title}&lt;/p&gt;
+      &lt;p className="cert-date"&gt;{item.date}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+/** 证书墙：照片墙风格，图片由用户上传到 public/certificates/ */
+export default function CertificateWall() {
+  return (
+    &lt;section id="certificates" className="section"&gt;
+      &lt;Reveal&gt;
+        &lt;p className="section-label"&gt;{"$ ls certs/"}&lt;/p&gt;
+        &lt;h2 className="section-title"&gt;证书墙&lt;/h2&gt;
+        &lt;p className="section-sub"&gt;我的证书与荣誉（图片可自行替换）&lt;/p&gt;
+      &lt;/Reveal&gt;
+
+      &lt;div className="cert-wall"&gt;
+        {certificates.map((c, i) =&gt; (
+          &lt;Reveal key={i}&gt;
+            &lt;CertCard item={c} index={i} /&gt;
+          &lt;/Reveal&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/section&gt;
+  );
+}</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/Contact.tsx</span><span class="fmeta">23 行 · 934 B</span></summary>
+    <pre class="code"><code>import { profile } from "../data/profile";
+import Reveal from "./Reveal";
+
+export default function Contact() {
+  return (
+    &lt;section id="contact" className="section contact"&gt;
+      &lt;Reveal&gt;
+        &lt;p className="section-label"&gt;{"$ ./contact.sh"}&lt;/p&gt;
+        &lt;h2 className="section-title"&gt;联系我&lt;/h2&gt;
+        &lt;p className="section-sub"&gt;欢迎交流与合作&lt;/p&gt;
+      &lt;/Reveal&gt;
+
+      &lt;Reveal className="card contact-card"&gt;
+        &lt;p className="item-title"&gt;邮箱：&lt;a href={"mailto:" + profile.email}&gt;{profile.email}&lt;/a&gt;&lt;/p&gt;
+        &lt;p className="item-title"&gt;GitHub：&lt;a href={profile.github} target="_blank" rel="noreferrer"&gt;{profile.github}&lt;/a&gt;&lt;/p&gt;
+        &lt;p className="item-title"&gt;电话：{profile.phone || "（待填写）"}&lt;/p&gt;
+        &lt;p className="item-title"&gt;微信：{profile.wechat || "（待填写）"}&lt;/p&gt;
+        &lt;p className="item-title"&gt;所在地：{profile.location}&lt;/p&gt;
+      &lt;/Reveal&gt;
+    &lt;/section&gt;
+  );
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/Experience.tsx</span><span class="fmeta">29 行 · 955 B</span></summary>
+    <pre class="code"><code>import { profile } from "../data/profile";
+import Reveal from "./Reveal";
+
+/** 个人经历：时间线 */
+export default function Experience() {
+  return (
+    &lt;section id="experience" className="section"&gt;
+      &lt;Reveal&gt;
+        &lt;p className="section-label"&gt;{"$ ls experience/"}&lt;/p&gt;
+        &lt;h2 className="section-title"&gt;个人经历&lt;/h2&gt;
+        &lt;p className="section-sub"&gt;学习与实践经历&lt;/p&gt;
+      &lt;/Reveal&gt;
+
+      &lt;div className="timeline"&gt;
+        {profile.experience.map((item, i) =&gt; (
+          &lt;Reveal key={i} className="timeline-item"&gt;
+            &lt;div className="timeline-dot" aria-hidden="true"&gt;&lt;/div&gt;
+            &lt;div className="card"&gt;
+              &lt;p className="item-title"&gt;{item.company} &lt;span className="period"&gt;{item.period}&lt;/span&gt;&lt;/p&gt;
+              &lt;p className="item-sub"&gt;{item.role}&lt;/p&gt;
+              &lt;p className="item-desc"&gt;{item.desc}&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/Reveal&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/section&gt;
+  );
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/Footer.tsx</span><span class="fmeta">23 行 · 728 B</span></summary>
+    <pre class="code"><code>import { useEffect, useRef, useState } from "react";
+import { profile } from "../data/profile";
+
+export default function Footer() {
+  const [visits, setVisits] = useState(0);
+  const counted = useRef(false);
+
+  useEffect(() =&gt; {
+    if (counted.current) return; // 防止开发模式重复计数
+    counted.current = true;
+    const n = Number(localStorage.getItem("visits") || "0") + 1;
+    localStorage.setItem("visits", String(n));
+    setVisits(n);
+  }, []);
+
+  return (
+    &lt;footer className="footer"&gt;
+      &lt;p&gt;© {new Date().getFullYear()} {profile.name} · 本机访问次数：{visits}&lt;/p&gt;
+      &lt;p style={{ marginTop: "0.3rem" }}&gt;主修医学 · 辅修 AI 编程 · Vite + React + TypeScript&lt;/p&gt;
+    &lt;/footer&gt;
+  );
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/Hero.tsx</span><span class="fmeta">58 行 · 1.9 KB</span></summary>
+    <pre class="code"><code>import { useEffect, useState } from "react";
+import { profile } from "../data/profile";
+import type { View } from "../App";
+import Reveal from "./Reveal";
+import Terminal from "./Terminal";
+
+/** 打字机效果 */
+function useTypewriter(text: string, speed = 85) {
+  const [display, setDisplay] = useState("");
+  useEffect(() =&gt; {
+    let i = 0;
+    setDisplay("");
+    const timer = setInterval(() =&gt; {
+      i++;
+      setDisplay(text.slice(0, i));
+      if (i &gt;= text.length) clearInterval(timer);
+    }, speed);
+    return () =&gt; clearInterval(timer);
+  }, [text, speed]);
+  return display;
+}
+
+export default function Hero({
+  onOpen,
+  onNavigate,
+}: {
+  onOpen: (v: View) =&gt; void;
+  onNavigate: (id: string) =&gt; void;
+}) {
+  const typed = useTypewriter(profile.tagline);
+  // 头像：依次尝试 avatar.png → avatar.jpg → 占位图 avatar.svg
+  const AVATAR_LIST = ["/avatar.png", "/avatar.jpg", "/avatar.svg"];
+  const [avatarIndex, setAvatarIndex] = useState(0);
+  const avatar = AVATAR_LIST[avatarIndex];
+
+  return (
+    &lt;section id="top" className="hero"&gt;
+      &lt;Reveal className="hero-inner"&gt;
+        &lt;p className="hero-terminal"&gt;{"$ " + "初始化个人档案 ... 完成"}&lt;/p&gt;
+        &lt;div className="hero-name-row"&gt;
+          &lt;img className="hero-avatar" src={avatar} alt="头像" onError={() =&gt; setAvatarIndex((i) =&gt; Math.min(i + 1, AVATAR_LIST.length - 1))} /&gt;
+          &lt;h1 className="hero-name"&gt;{profile.name}&lt;/h1&gt;
+        &lt;/div&gt;
+        &lt;p className="hero-title"&gt;{profile.title}&lt;/p&gt;
+        &lt;p className="hero-tagline"&gt;
+          {typed}
+          &lt;span className="cursor" aria-hidden="true" /&gt;
+        &lt;/p&gt;
+        &lt;div className="hero-actions"&gt;
+          &lt;a className="btn btn-primary" href="#projects"&gt;查看项目&lt;/a&gt;
+          &lt;a className="btn btn-ghost" href="#about"&gt;关于我&lt;/a&gt;
+        &lt;/div&gt;
+        &lt;Terminal onOpen={onOpen} onNavigate={onNavigate} /&gt;
+      &lt;/Reveal&gt;
+    &lt;/section&gt;
+  );
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/Hobbies.tsx</span><span class="fmeta">25 行 · 787 B</span></summary>
+    <pre class="code"><code>import { profile } from "../data/profile";
+import Reveal from "./Reveal";
+
+/** 兴趣爱好板块 */
+export default function Hobbies() {
+  return (
+    &lt;section id="hobbies" className="section"&gt;
+      &lt;Reveal&gt;
+        &lt;p className="section-label"&gt;{"$ ls hobbies/"}&lt;/p&gt;
+        &lt;h2 className="section-title"&gt;兴趣爱好&lt;/h2&gt;
+        &lt;p className="section-sub"&gt;工作学习之余，我喜欢这些&lt;/p&gt;
+      &lt;/Reveal&gt;
+
+      &lt;div className="interest-grid"&gt;
+        {profile.hobbies.map((h, i) =&gt; (
+          &lt;Reveal key={i} className="card interest-card"&gt;
+            &lt;span className="interest-icon"&gt;{h.icon}&lt;/span&gt;
+            &lt;h3 className="interest-name"&gt;{h.name}&lt;/h3&gt;
+            &lt;p className="item-desc"&gt;{h.desc}&lt;/p&gt;
+          &lt;/Reveal&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/section&gt;
+  );
+}</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/MusicPlayer.tsx</span><span class="fmeta">89 行 · 2.8 KB</span></summary>
+    <pre class="code"><code>import { useEffect, useRef, useState } from "react";
+import { loadFromStorage, saveToStorage } from "../utils/storage";
+import { toast } from "../utils/toast";
+
+/** 音乐播放器：播放《Call of Silence》（泽野弘之） */
+export default function MusicPlayer() {
+  const audioRef = useRef&lt;HTMLAudioElement | null&gt;(null);
+  const [playing, setPlaying] = useState(false);
+  const [volume, setVolume] = useState&lt;number&gt;(() =&gt; loadFromStorage("musicVolume", 0.5));
+  const [panelOpen, setPanelOpen] = useState(false);
+  const [missing, setMissing] = useState(false);
+
+  useEffect(() =&gt; {
+    saveToStorage("musicVolume", volume);
+    if (audioRef.current) audioRef.current.volume = volume;
+  }, [volume]);
+
+  // 支持终端命令 music 触发播放/暂停
+  useEffect(() =&gt; {
+    const handler = () =&gt; togglePlay();
+    window.addEventListener("toggle-music", handler);
+    return () =&gt; window.removeEventListener("toggle-music", handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playing]);
+
+  function togglePlay() {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (playing) {
+      audio.pause();
+      setPlaying(false);
+    } else {
+      audio
+        .play()
+        .then(() =&gt; setPlaying(true))
+        .catch(() =&gt; {
+          setMissing(true);
+          toast("未找到音乐文件：public/music/call-of-silence.mp3", "error");
+        });
+    }
+  }
+
+  return (
+    &lt;div className="music-player"&gt;
+      &lt;div className={"music-panel" + (panelOpen ? " open" : "")}&gt;
+        &lt;span className="music-title"&gt;♪ Call of Silence&lt;/span&gt;
+        &lt;span className="music-sub"&gt;泽野弘之 · Hiroyuki Sawano&lt;/span&gt;
+        {missing &amp;&amp; (
+          &lt;span className="music-tip"&gt;
+            未找到音乐文件：请把 MP3 放到 public/music/call-of-silence.mp3
+          &lt;/span&gt;
+        )}
+        &lt;div className="music-volume-row"&gt;
+          &lt;span&gt;音量&lt;/span&gt;
+          &lt;input
+            type="range"
+            min={0}
+            max={1}
+            step={0.05}
+            value={volume}
+            onChange={(e) =&gt; setVolume(Number(e.target.value))}
+          /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div style={{ display: "flex", gap: "8px", alignItems: "center" }}&gt;
+        &lt;button className="music-btn" onClick={togglePlay} title="播放 / 暂停音乐" aria-label="播放暂停"&gt;
+          &lt;span className={"music-disc" + (playing ? "" : " paused")} /&gt;
+        &lt;/button&gt;
+        &lt;button
+          className="music-panel-btn"
+          onClick={() =&gt; setPanelOpen(!panelOpen)}
+          title="音量设置"
+          aria-label="音量设置"
+        &gt;
+          🔊
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;audio
+        ref={audioRef}
+        src="/music/call-of-silence.mp3"
+        loop
+        preload="auto"
+        onError={() =&gt; setMissing(true)}
+      /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/Navbar.tsx</span><span class="fmeta">65 行 · 2.1 KB</span></summary>
+    <pre class="code"><code>import { useEffect, useState } from "react";
+import { profile } from "../data/profile";
+import type { View } from "../App";
+
+const links = [
+  { id: "about", label: "关于我" },
+  { id: "certificates", label: "证书" },
+  { id: "experience", label: "经历" },
+  { id: "hobbies", label: "爱好" },
+  { id: "strengths", label: "特长" },
+  { id: "projects", label: "项目" },
+  { id: "contact", label: "联系" },
+];
+
+export default function Navbar({ view, onNavigate }: { view: View; onNavigate: (v: View) =&gt; void }) {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() =&gt; {
+    const onScroll = () =&gt; setScrolled(window.scrollY &gt; 10);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () =&gt; window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  /** 点击导航：如果不在首页，先回首页再平滑滚动到对应板块 */
+  const go = (id: string) =&gt; {
+    setMenuOpen(false);
+    if (view !== "home") {
+      onNavigate("home");
+      setTimeout(() =&gt; document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), 80);
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  return (
+    &lt;header className={"navbar" + (scrolled ? " scrolled" : "")}&gt;
+      &lt;a
+        className="brand"
+        href="#top"
+        onClick={(e) =&gt; {
+          e.preventDefault();
+          setMenuOpen(false);
+          if (view !== "home") onNavigate("home");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      &gt;
+        {profile.name}@cyber
+      &lt;/a&gt;
+
+      &lt;nav className={"nav-links" + (menuOpen ? " open" : "")}&gt;
+        {links.map((l) =&gt; (
+          &lt;a key={l.id} href={"#" + l.id} onClick={(e) =&gt; { e.preventDefault(); go(l.id); }}&gt;
+            {l.label}
+          &lt;/a&gt;
+        ))}
+      &lt;/nav&gt;
+
+      &lt;button className={"menu-btn" + (menuOpen ? " open" : "")} onClick={() =&gt; setMenuOpen(!menuOpen)} aria-label="菜单"&gt;
+        &lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/header&gt;
+  );
+}</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/Projects.tsx</span><span class="fmeta">135 行 · 4.5 KB</span></summary>
+    <pre class="code"><code>import { useState } from "react";
+import type { View } from "../App";
+import { flags, loadSolved, addSolved } from "../data/flags";
+import { toast } from "../utils/toast";
+import Reveal from "./Reveal";
+
+const projects: {
+  key: View;
+  icon: string;
+  name: string;
+  category: string;
+  difficulty: "easy" | "medium" | "hard";
+  points: number;
+  desc: string;
+  tags: string[];
+  hint: string;
+}[] = [
+  {
+    key: "snake",
+    icon: "🐍",
+    name: "贪吃蛇游戏",
+    category: "GAME",
+    difficulty: "easy",
+    points: 100,
+    desc: "用 Canvas 实现的经典贪吃蛇，支持键盘和屏幕按钮操作，最高分保存在浏览器本地（localStorage）。",
+    tags: ["React", "Canvas", "TypeScript"],
+    hint: "在游戏中得分 ≥ 10 可发现 flag",
+  },
+  {
+    key: "crawler",
+    icon: "🕷️",
+    name: "爬虫项目",
+    category: "WEB",
+    difficulty: "medium",
+    points: 200,
+    desc: "网络爬虫项目：网页演示版可实时抓取公开数据；完整 Python 爬虫代码在 projects/crawler/ 目录中。",
+    tags: ["Python", "爬虫", "公开 API"],
+    hint: "成功抓取一次数据后可发现 flag",
+  },
+  {
+    key: "vision",
+    icon: "👁️",
+    name: "人脸识别·动作捕捉·手势识别",
+    category: "AI",
+    difficulty: "hard",
+    points: 300,
+    desc: "使用 OpenCV.js 实时进行人脸识别、动作捕捉与手势识别，需要摄像头；完整 Python 代码在 projects/opencv/ 目录中。",
+    tags: ["OpenCV", "人脸识别", "手势识别", "动作捕捉"],
+    hint: "打开项目并启动摄像头，检测到人脸即可发现 flag",
+  },
+];
+
+const DIFF_DOTS: Record&lt;string, number&gt; = { easy: 1, medium: 2, hard: 3 };
+
+/** 项目作品：仿 CTF 平台的"挑战"卡片，含 flag 提交 */
+export default function Projects({ onOpen }: { onOpen: (v: View) =&gt; void }) {
+  const [solved, setSolved] = useState&lt;string[]&gt;(() =&gt; loadSolved());
+  const [inputs, setInputs] = useState&lt;Record&lt;string, string&gt;&gt;({});
+
+  const submitFlag = (key: string) =&gt; {
+    const val = (inputs[key] || "").trim();
+    if (!val) {
+      toast("请输入 flag", "error");
+      return;
+    }
+    if (val === flags[key]) {
+      const list = addSolved(key);
+      setSolved(list);
+      toast("🎉 正确！flag 已解锁，成就 +1", "success");
+    } else {
+      toast("❌ flag 错误，再试试", "error");
+    }
+  };
+
+  return (
+    &lt;section id="projects" className="section"&gt;
+      &lt;Reveal&gt;
+        &lt;p className="section-label"&gt;{"$ ls challenges/"}&lt;/p&gt;
+        &lt;h2 className="section-title"&gt;项目作品&lt;/h2&gt;
+        &lt;p className="section-sub"&gt;像 CTF 挑战一样：打开项目、发现 flag、提交解锁成就&lt;/p&gt;
+      &lt;/Reveal&gt;
+
+      &lt;div className="projects-grid"&gt;
+        {projects.map((p) =&gt; {
+          const isSolved = solved.includes(p.key);
+          return (
+            &lt;Reveal key={p.key} className="card project-card"&gt;
+              &lt;div className="challenge-head"&gt;
+                &lt;span className="challenge-cat"&gt;{p.category}&lt;/span&gt;
+                &lt;span className="challenge-points"&gt;+{p.points}&lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;h3 className="project-name"&gt;{p.icon} {p.name}&lt;/h3&gt;
+
+              &lt;div className="challenge-diff"&gt;
+                &lt;span&gt;难度&lt;/span&gt;
+                {[1, 2, 3].map((i) =&gt; (
+                  &lt;span key={i} className={"diff-dot" + (i &lt;= DIFF_DOTS[p.difficulty] ? " on" : "")} /&gt;
+                ))}
+                &lt;span className="diff-label"&gt;{p.difficulty}&lt;/span&gt;
+              &lt;/div&gt;
+
+              &lt;p className="item-desc"&gt;{p.desc}&lt;/p&gt;
+
+              &lt;div className="project-tags"&gt;
+                {p.tags.map((t) =&gt; &lt;span key={t} className="skill-tag"&gt;{t}&lt;/span&gt;)}
+              &lt;/div&gt;
+
+              &lt;p className="challenge-hint"&gt;💡 {p.hint}&lt;/p&gt;
+
+              &lt;button className="open-btn" onClick={() =&gt; onOpen(p.key)}&gt;▶ 打开项目&lt;/button&gt;
+
+              &lt;div className="flag-row"&gt;
+                &lt;input
+                  value={inputs[p.key] || ""}
+                  onChange={(e) =&gt; setInputs({ ...inputs, [p.key]: e.target.value })}
+                  placeholder="flag{...}"
+                  disabled={isSolved}
+                  aria-label={"提交 " + p.name + " 的 flag"}
+                /&gt;
+                &lt;button
+                  className="btn btn-ghost flag-btn"
+                  onClick={() =&gt; submitFlag(p.key)}
+                  disabled={isSolved}
+                &gt;
+                  {isSolved ? "✅ 已解决" : "提交"}
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/Reveal&gt;
+          );
+        })}
+      &lt;/div&gt;
+    &lt;/section&gt;
+  );
+}</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/Reveal.tsx</span><span class="fmeta">36 行 · 939 B</span></summary>
+    <pre class="code"><code>import type { ReactNode } from "react";
+import { useEffect, useRef } from "react";
+
+/** 滚动渐入容器 */
+export default function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
+  const ref = useRef&lt;HTMLDivElement | null&gt;(null);
+
+  useEffect(() =&gt; {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      el.classList.add("is-visible");
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) =&gt; {
+        entries.forEach((entry) =&gt; {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    observer.observe(el);
+    return () =&gt; observer.disconnect();
+  }, []);
+
+  return (
+    &lt;div ref={ref} className={"reveal " + className}&gt;
+      {children}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/Stats.tsx</span><span class="fmeta">28 行 · 913 B</span></summary>
+    <pre class="code"><code>import { profile } from "../data/profile";
+import { loadSolved } from "../data/flags";
+import { useCountUp } from "../hooks/useCountUp";
+import Reveal from "./Reveal";
+
+function Stat({ label, value, suffix = "" }: { label: string; value: number; suffix?: string }) {
+  const { ref, value: n } = useCountUp(value);
+  return (
+    &lt;div ref={ref} className="stat"&gt;
+      &lt;p className="stat-num"&gt;{n}{suffix}&lt;/p&gt;
+      &lt;p className="stat-label"&gt;{label}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+/** 成就数据条：仿 CTF 平台的数据展示 */
+export default function Stats() {
+  const visits = Number(localStorage.getItem("visits") || "0");
+
+  return (
+    &lt;Reveal className="stats"&gt;
+      &lt;Stat label="技能数量" value={profile.skills.length} /&gt;
+      &lt;Stat label="可玩项目" value={3} /&gt;
+      &lt;Stat label="已解 Flag" value={loadSolved().length} /&gt;
+      &lt;Stat label="本机访问" value={visits} /&gt;
+    &lt;/Reveal&gt;
+  );
+}</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/Strengths.tsx</span><span class="fmeta">25 行 · 785 B</span></summary>
+    <pre class="code"><code>import { profile } from "../data/profile";
+import Reveal from "./Reveal";
+
+/** 个人特长板块 */
+export default function Strengths() {
+  return (
+    &lt;section id="strengths" className="section"&gt;
+      &lt;Reveal&gt;
+        &lt;p className="section-label"&gt;{"$ ./strengths --list"}&lt;/p&gt;
+        &lt;h2 className="section-title"&gt;个人特长&lt;/h2&gt;
+        &lt;p className="section-sub"&gt;我的优势与特长&lt;/p&gt;
+      &lt;/Reveal&gt;
+
+      &lt;div className="interest-grid"&gt;
+        {profile.strengths.map((s, i) =&gt; (
+          &lt;Reveal key={i} className="card interest-card"&gt;
+            &lt;span className="interest-icon"&gt;{s.icon}&lt;/span&gt;
+            &lt;h3 className="interest-name"&gt;{s.name}&lt;/h3&gt;
+            &lt;p className="item-desc"&gt;{s.desc}&lt;/p&gt;
+          &lt;/Reveal&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/section&gt;
+  );
+}</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/Terminal.tsx</span><span class="fmeta">130 行 · 4.2 KB</span></summary>
+    <pre class="code"><code>import { useEffect, useRef, useState } from "react";
+import type { View } from "../App";
+import { profile } from "../data/profile";
+
+interface HistoryItem {
+  text: string;
+  kind: "cmd" | "out" | "ok" | "err";
+}
+
+const HELP = [
+  "可用命令：",
+  "  help            显示帮助",
+  "  whoami          我是谁",
+  "  about           个人简历",
+  "  certificates    证书墙",
+  "  experience      个人经历",
+  "  projects        项目作品",
+  "  contact         联系我",
+  "  snake           打开贪吃蛇",
+  "  crawler         打开爬虫项目",
+  "  vision          打开人脸识别项目",
+  "  music           播放/暂停音乐",
+  "  flag            查看 flag 提示",
+  "  clear           清空终端",
+];
+
+/** 交互式终端：仿 CTF 平台的命令行交互 */
+export default function Terminal({
+  onOpen,
+  onNavigate,
+}: {
+  onOpen: (v: View) =&gt; void;
+  onNavigate: (id: string) =&gt; void;
+}) {
+  const [history, setHistory] = useState&lt;HistoryItem[]&gt;([
+    { text: "Cyber Terminal 交互终端", kind: "out" },
+    { text: "输入 help 查看可用命令", kind: "out" },
+  ]);
+  const [input, setInput] = useState("");
+  const bodyRef = useRef&lt;HTMLDivElement | null&gt;(null);
+
+  useEffect(() =&gt; {
+    bodyRef.current?.scrollTo({ top: bodyRef.current.scrollHeight });
+  }, [history]);
+
+  const run = (raw: string) =&gt; {
+    const cmd = raw.trim().toLowerCase();
+    const items: HistoryItem[] = [{ text: "$ " + raw, kind: "cmd" }];
+    const push = (text: string, kind: HistoryItem["kind"] = "out") =&gt; items.push({ text, kind });
+
+    if (!cmd) {
+      /* 空命令 */
+    } else if (cmd === "help") {
+      HELP.forEach((l) =&gt; push(l));
+    } else if (cmd === "whoami") {
+      push(profile.name + " · " + profile.title, "ok");
+    } else if (cmd === "clear") {
+      setHistory([]);
+      setInput("");
+      return;
+    } else if (cmd === "about") {
+      push("正在跳转到 个人简历 ...", "ok");
+      onNavigate("about");
+    } else if (cmd === "certificates" || cmd === "cert") {
+      push("正在跳转到 证书墙 ...", "ok");
+      onNavigate("certificates");
+    } else if (cmd === "experience") {
+      push("正在跳转到 个人经历 ...", "ok");
+      onNavigate("experience");
+    } else if (cmd === "projects") {
+      push("正在跳转到 项目作品 ...", "ok");
+      onNavigate("projects");
+    } else if (cmd === "contact") {
+      push("正在跳转到 联系我 ...", "ok");
+      onNavigate("contact");
+    } else if (cmd === "snake") {
+      push("正在启动 贪吃蛇 ...", "ok");
+      setTimeout(() =&gt; onOpen("snake"), 350);
+    } else if (cmd === "crawler") {
+      push("正在启动 爬虫项目 ...", "ok");
+      setTimeout(() =&gt; onOpen("crawler"), 350);
+    } else if (cmd === "vision") {
+      push("正在启动 人脸识别项目 ...", "ok");
+      setTimeout(() =&gt; onOpen("vision"), 350);
+    } else if (cmd === "music") {
+      window.dispatchEvent(new CustomEvent("toggle-music"));
+      push("♪ 已切换音乐（Call of Silence）", "ok");
+    } else if (cmd === "flag") {
+      push("在项目卡片底部输入 flag 提交，即可解锁成就！", "out");
+    } else {
+      push("command not found: " + cmd + "（输入 help 查看命令）", "err");
+    }
+
+    setHistory((h) =&gt; [...h, ...items]);
+    setInput("");
+  };
+
+  return (
+    &lt;div className="terminal"&gt;
+      &lt;div className="terminal-bar"&gt;
+        &lt;span className="dot dot-r"&gt;&lt;/span&gt;
+        &lt;span className="dot dot-y"&gt;&lt;/span&gt;
+        &lt;span className="dot dot-g"&gt;&lt;/span&gt;
+        &lt;span className="terminal-title"&gt;cyber@resume: ~&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div className="terminal-body" ref={bodyRef}&gt;
+        {history.map((h, i) =&gt; (
+          &lt;p key={i} className={"terminal-line " + h.kind}&gt;{h.text}&lt;/p&gt;
+        ))}
+      &lt;/div&gt;
+      &lt;form
+        className="terminal-input-row"
+        onSubmit={(e) =&gt; {
+          e.preventDefault();
+          run(input);
+        }}
+      &gt;
+        &lt;span className="terminal-prompt"&gt;$&lt;/span&gt;
+        &lt;input
+          value={input}
+          onChange={(e) =&gt; setInput(e.target.value)}
+          autoComplete="off"
+          autoCapitalize="off"
+          spellCheck={false}
+          aria-label="终端命令输入"
+        /&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/Toasts.tsx</span><span class="fmeta">25 行 · 629 B</span></summary>
+    <pre class="code"><code>﻿import { useEffect, useState } from "react";
+import { subscribeToast, type ToastItem } from "../utils/toast";
+
+/** 右上角 toast 消息列表 */
+export default function Toasts() {
+  const [items, setItems] = useState&lt;ToastItem[]&gt;([]);
+
+  useEffect(() =&gt; {
+    return subscribeToast((t) =&gt; {
+      setItems((arr) =&gt; [...arr, t]);
+      setTimeout(() =&gt; setItems((arr) =&gt; arr.filter((x) =&gt; x.id !== t.id)), 3400);
+    });
+  }, []);
+
+  return (
+    &lt;div className="toasts"&gt;
+      {items.map((t) =&gt; (
+        &lt;div key={t.id} className={"toast toast-" + t.type}&gt;
+          {t.message}
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/data/certificates.ts</span><span class="fmeta">21 行 · 803 B</span></summary>
+    <pre class="code"><code>/**
+ * 证书墙数据 —— 证书图片和文字都在这里配置！
+ *
+ * 图片放法：把证书图片放到 public/certificates/ 文件夹，
+ * 然后在这里把 image 改成你的图片文件名。
+ *
+ * 也可以不改文件名：把 public/certificates/cert-1.svg 等占位图
+ * 替换成你自己的图片并保持同名即可。
+ */
+
+export interface CertificateItem {
+  title: string;   // 证书名称
+  date: string;    // 获得时间
+  image: string;   // 图片路径（放在 public/certificates/ 下）
+}
+
+export const certificates: CertificateItem[] = [
+  { title: "证书 1", date: "2026", image: "/certificates/cert-1.jpg" },
+  { title: "证书 2", date: "20XX", image: "/certificates/cert-2.jpg" },
+  { title: "证书 3", date: "20XX", image: "/certificates/cert-3.jpg" },
+];</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/data/flags.ts</span><span class="fmeta">27 行 · 755 B</span></summary>
+    <pre class="code"><code>/** 项目 flag（挑战口令）：在项目卡片底部提交正确的 flag 即可解锁"已解决"成就 */
+
+export const flags: Record&lt;string, string&gt; = {
+  snake: "flag{snake_2026}",
+  crawler: "flag{crawler_2026}",
+  vision: "flag{vision_2026}",
+};
+
+/** 读取已解决的 flag 列表（存 localStorage） */
+export function loadSolved(): string[] {
+  try {
+    const raw = localStorage.getItem("solvedFlags");
+    return raw ? (JSON.parse(raw) as string[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+/** 标记一个 flag 为已解决 */
+export function addSolved(key: string): string[] {
+  const list = loadSolved();
+  if (!list.includes(key)) {
+    list.push(key);
+    localStorage.setItem("solvedFlags", JSON.stringify(list));
+  }
+  return list;
+}</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/data/profile.ts</span><span class="fmeta">67 行 · 2.8 KB</span></summary>
+    <pre class="code"><code>/**
+ * ================================================================
+ *  个人资料配置文件 —— 网站上的所有文字都在这里修改！
+ *  改完保存，浏览器会自动刷新。
+ * ================================================================
+ */
+
+export const profile = {
+  // ---------- 基本信息（改这里） ----------
+  name: "周颖乐",
+  title: "法医学专业 · AI 编程爱好者",
+  tagline: "主修医学 · 辅修 AI 编程",
+  location: "贵州",
+  email: "2040594606@qq.com",
+  github: "https://github.com/neverlone888",
+  phone: "17848564983",  // 电话
+  wechat: "17848564983", // 微信（与电话同号）
+
+  // ---------- 个人简介（改这里） ----------
+  intro:
+    "你好！我是周颖乐，一名主修法医学、辅修 AI 编程的学生。我热爱医学，也热爱计算机与人工智能，希望用 AI 技术为医学带来更多可能。这个网站是我的个人名片，记录了学习、经历和作品。",
+
+  // ---------- 技能清单（改这里） ----------
+  skills: ["医学基础", "法医学", "Python", "机器学习", "AI 应用", "数据分析", "React", "TypeScript", "Git"],
+
+  // ---------- 兴趣爱好（改这里） ----------
+  hobbies: [
+    { icon: "🎵", name: "音乐", desc: "喜欢听音乐，放松心情" },
+    { icon: "💻", name: "编程", desc: "自学 AI 编程，折腾各种小工具" },
+    { icon: "📚", name: "阅读", desc: "喜欢阅读医学与科技类书籍" },
+    { icon: "⚽", name: "运动", desc: "偶尔运动，保持活力" },
+  ],
+
+  // ---------- 个人特长（改这里） ----------
+  strengths: [
+    { icon: "🧬", name: "医学基础", desc: "系统学习法医学专业课程" },
+    { icon: "🤖", name: "AI 应用", desc: "熟练使用 AI 工具解决实际问题" },
+    { icon: "🐍", name: "Python", desc: "机器学习与数据分析" },
+    { icon: "🗣️", name: "沟通表达", desc: "数码产品销售经验，善于沟通" },
+  ],
+  // ---------- 教育经历（改这里） ----------
+  education: [
+    {
+      school: "贵州医科大学",
+      degree: "法医学 · 本科（主修医学）",
+      period: "2026 - 2031",
+      desc: "主修法医学，辅修 AI 编程与计算机知识，是一名忠实的 AI 爱好者。",
+    },
+  ],
+
+  // ---------- 学习 / 实践经历（改这里） ----------
+  experience: [
+    {
+      company: "贵州医科大学",
+      role: "法医学学生 · 主修医学",
+      period: "2026 - 至今",
+      desc: "系统学习法医学专业课程，同时辅修 AI 编程，学习 Python、机器学习与数据分析。",
+    },
+    {
+      company: "四川星辰科技",
+      role: "最佳新人 · 数码产品销售",
+      period: "2026 - 至今",
+      desc: "负责公司数码产品销售工作，课余学习 AI 编程，并尝试把技术应用到实际工作中。",
+    },
+  ],
+};
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/hooks/useCountUp.ts</span><span class="fmeta">40 行 · 1.2 KB</span></summary>
+    <pre class="code"><code>﻿import { useEffect, useRef, useState } from "react";
+
+/** 数字滚动动画：元素进入视口时从 0 数到目标值 */
+export function useCountUp(target: number, duration = 1200) {
+  const [value, setValue] = useState(0);
+  const ref = useRef&lt;HTMLDivElement | null&gt;(null);
+  const started = useRef(false);
+
+  useEffect(() =&gt; {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setValue(target);
+      return;
+    }
+    const obs = new IntersectionObserver(
+      (entries) =&gt; {
+        entries.forEach((e) =&gt; {
+          if (e.isIntersecting &amp;&amp; !started.current) {
+            started.current = true;
+            const t0 = performance.now();
+            const tick = (now: number) =&gt; {
+              const p = Math.min(1, (now - t0) / duration);
+              setValue(Math.round(target * (1 - Math.pow(1 - p, 3))));
+              if (p &lt; 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+            obs.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () =&gt; obs.disconnect();
+  }, [target, duration]);
+
+  return { ref, value };
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/utils/storage.ts</span><span class="fmeta">16 行 · 433 B</span></summary>
+    <pre class="code"><code>/** localStorage 读写工具（所有用户数据都保存在浏览器本地） */
+
+export function loadFromStorage&lt;T&gt;(key: string, fallback: T): T {
+  try {
+    const raw = localStorage.getItem(key);
+    if (raw === null) return fallback;
+    return JSON.parse(raw) as T;
+  } catch {
+    return fallback;
+  }
+}
+
+export function saveToStorage&lt;T&gt;(key: string, value: T): void {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/utils/toast.ts</span><span class="fmeta">25 行 · 614 B</span></summary>
+    <pre class="code"><code>﻿/** 轻量 toast 消息系统：任何组件都能调用 toast() 弹出提示 */
+
+export type ToastType = "success" | "error" | "info";
+
+export interface ToastItem {
+  id: number;
+  message: string;
+  type: ToastType;
+}
+
+let listeners: ((t: ToastItem) =&gt; void)[] = [];
+let nextId = 1;
+
+export function toast(message: string, type: ToastType = "info") {
+  const item: ToastItem = { id: nextId++, message, type };
+  listeners.forEach((l) =&gt; l(item));
+}
+
+export function subscribeToast(fn: (t: ToastItem) =&gt; void) {
+  listeners.push(fn);
+  return () =&gt; {
+    listeners = listeners.filter((l) =&gt; l !== fn);
+  };
+}
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/projects/CrawlerDemo.tsx</span><span class="fmeta">102 行 · 3.7 KB</span></summary>
+    <pre class="code"><code>import { useState } from "react";
+import { flags } from "../data/flags";
+
+interface Book {
+  title: string;
+  author: string[];
+  year: number | null;
+}
+
+interface ApiDoc {
+  title?: string;
+  author_name?: string[];
+  first_publish_year?: number;
+}
+
+/** 爬虫项目：浏览器演示版（通过公开 API 演示抓取流程，成功后可发现 flag） */
+export default function CrawlerDemo({ onBack }: { onBack: () =&gt; void }) {
+  const [keyword, setKeyword] = useState("医学");
+  const [log, setLog] = useState&lt;string[]&gt;(["&gt; 爬虫演示已就绪。输入关键词，点击“开始抓取”。"]);
+  const [results, setResults] = useState&lt;Book[] | null&gt;(null);
+  const [loading, setLoading] = useState(false);
+
+  async function run() {
+    const kw = keyword.trim();
+    if (!kw || loading) return;
+    setLoading(true);
+    setResults(null);
+
+    const lines: string[] = [];
+    lines.push("&gt; 正在连接 openlibrary.org ...");
+    setLog([...lines]);
+
+    try {
+      const url = "https://openlibrary.org/search.json?q=" + encodeURIComponent(kw) + "&amp;limit=8";
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();
+
+      lines.push("&gt; 连接成功，开始抓取数据 ...");
+      lines.push("&gt; 共找到 " + (data.numFound ?? 0) + " 条记录，解析前 8 条 ...");
+      lines.push("&gt; 完成！");
+      lines.push("🎯 flag：" + flags.crawler + " —— 回首页项目卡片提交解锁成就！");
+      setLog([...lines]);
+
+      const books: Book[] = ((data.docs as ApiDoc[]) || []).map((d) =&gt; ({
+        title: d.title || "无标题",
+        author: d.author_name || [],
+        year: d.first_publish_year ?? null,
+      }));
+      setResults(books);
+    } catch (err) {
+      lines.push("&gt; 抓取失败：" + (err instanceof Error ? err.message : String(err)));
+      lines.push("&gt; 提示：浏览器演示版只能访问允许跨域的公开 API；完整爬虫见 projects/crawler/crawler.py");
+      setLog([...lines]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    &lt;div className="page"&gt;
+      &lt;div className="page-header"&gt;
+        &lt;h1 className="page-title"&gt;爬虫项目（浏览器演示版）&lt;/h1&gt;
+        &lt;button className="back-btn" onClick={onBack}&gt;← 返回首页&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div className="crawler-wrap"&gt;
+        &lt;div className="crawler-input-row"&gt;
+          &lt;input
+            value={keyword}
+            onChange={(e) =&gt; setKeyword(e.target.value)}
+            placeholder="输入要抓取的关键词，例如：医学 / AI / Python"
+            onKeyDown={(e) =&gt; e.key === "Enter" &amp;&amp; run()}
+          /&gt;
+          &lt;button className="btn btn-primary" onClick={run} disabled={loading}&gt;
+            {loading ? "抓取中..." : "▶ 开始抓取"}
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div className="crawler-log"&gt;{log.join("\n")}&lt;/div&gt;
+
+        &lt;div className="note-box"&gt;
+          💡 说明：这是&lt;b&gt;浏览器演示版&lt;/b&gt;，通过公开 API（Open Library 图书馆）演示"输入关键词 → 抓取 → 解析 → 展示"的爬虫流程。
+          完整的 Python 爬虫代码在 &lt;b&gt;projects/crawler/crawler.py&lt;/b&gt;（需要 Python 环境运行）。
+        &lt;/div&gt;
+
+        {results &amp;&amp; results.length &gt; 0 &amp;&amp; (
+          &lt;div className="result-list"&gt;
+            {results.map((b, i) =&gt; (
+              &lt;div key={i} className="result-item"&gt;
+                &lt;h4&gt;{b.title}&lt;/h4&gt;
+                &lt;p&gt;作者：{b.author.join("、") || "未知"}&lt;/p&gt;
+                &lt;p&gt;出版年份：{b.year ?? "未知"}&lt;/p&gt;
+              &lt;/div&gt;
+            ))}
+          &lt;/div&gt;
+        )}
+        {results &amp;&amp; results.length === 0 &amp;&amp; &lt;p className="item-desc"&gt;没有抓取到数据，换个关键词试试。&lt;/p&gt;}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/projects/SnakeGame.tsx</span><span class="fmeta">232 行 · 7.7 KB</span></summary>
+    <pre class="code"><code>import { useCallback, useEffect, useRef, useState } from "react";
+import { loadFromStorage, saveToStorage } from "../utils/storage";
+import { flags } from "../data/flags";
+
+const GRID = 20;          // 棋盘 20 x 20
+const CELL = 20;          // 每格像素
+const CANVAS = GRID * CELL;
+
+interface Point { x: number; y: number; }
+type Dir = "up" | "down" | "left" | "right";
+
+const DIRS: Record&lt;Dir, Point&gt; = {
+  up: { x: 0, y: -1 },
+  down: { x: 0, y: 1 },
+  left: { x: -1, y: 0 },
+  right: { x: 1, y: 0 },
+};
+
+const OPPOSITE: Record&lt;Dir, Dir&gt; = { up: "down", down: "up", left: "right", right: "left" };
+
+/** 贪吃蛇：Canvas 实现，键盘 + 屏幕按钮控制，最高分存 localStorage，得分≥10 发现 flag */
+export default function SnakeGame({ onBack }: { onBack: () =&gt; void }) {
+  const canvasRef = useRef&lt;HTMLCanvasElement | null&gt;(null);
+  const snakeRef = useRef&lt;Point[]&gt;([
+    { x: 10, y: 10 },
+    { x: 9, y: 10 },
+    { x: 8, y: 10 },
+  ]);
+  const dirRef = useRef&lt;Dir&gt;("right");
+  const nextDirRef = useRef&lt;Dir&gt;("right");
+  const foodRef = useRef&lt;Point&gt;({ x: 15, y: 10 });
+  const speedRef = useRef(140);
+  const scoreRef = useRef(0);
+  const highRef = useRef&lt;number&gt;(loadFromStorage("snakeHighScore", 0));
+
+  const [score, setScore] = useState(0);
+  const [high, setHigh] = useState&lt;number&gt;(highRef.current);
+  const [status, setStatus] = useState&lt;"idle" | "running" | "over"&gt;("idle");
+  const statusRef = useRef(status);
+  const [flagRevealed, setFlagRevealed] = useState(false);
+  const flagShownRef = useRef(false);
+
+  useEffect(() =&gt; { statusRef.current = status; }, [status]);
+
+  /** 生成一个不在蛇身上的食物位置 */
+  const spawnFood = useCallback((snake: Point[]): Point =&gt; {
+    const free: Point[] = [];
+    for (let y = 0; y &lt; GRID; y++) {
+      for (let x = 0; x &lt; GRID; x++) {
+        if (!snake.some((s) =&gt; s.x === x &amp;&amp; s.y === y)) free.push({ x, y });
+      }
+    }
+    return free.length ? free[Math.floor(Math.random() * free.length)] : { x: -1, y: -1 };
+  }, []);
+
+  /** 绘制画面 */
+  const draw = useCallback(() =&gt; {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    ctx.clearRect(0, 0, CANVAS, CANVAS);
+
+    // 食物（红色发光圆点）
+    ctx.fillStyle = "#ff4d6d";
+    ctx.shadowColor = "#ff4d6d";
+    ctx.shadowBlur = 10;
+    ctx.beginPath();
+    ctx.arc(foodRef.current.x * CELL + CELL / 2, foodRef.current.y * CELL + CELL / 2, CELL / 2 - 3, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 蛇身
+    snakeRef.current.forEach((seg, i) =&gt; {
+      ctx.fillStyle = i === 0 ? "#00ffd1" : "#0f8f7a";
+      ctx.shadowColor = "#00ffd1";
+      ctx.shadowBlur = i === 0 ? 12 : 4;
+      ctx.beginPath();
+      ctx.roundRect(seg.x * CELL + 2, seg.y * CELL + 2, CELL - 4, CELL - 4, 5);
+      ctx.fill();
+    });
+    ctx.shadowBlur = 0;
+  }, []);
+
+  /** 重置游戏 */
+  const reset = useCallback(() =&gt; {
+    snakeRef.current = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 },
+    ];
+    dirRef.current = "right";
+    nextDirRef.current = "right";
+    speedRef.current = 140;
+    scoreRef.current = 0;
+    setScore(0);
+    flagShownRef.current = false;
+    setFlagRevealed(false);
+    foodRef.current = spawnFood(snakeRef.current);
+    setStatus("idle");
+    draw();
+  }, [draw, spawnFood]);
+
+  /** 走一步 */
+  const step = useCallback(() =&gt; {
+    const snake = snakeRef.current;
+    const dir = (dirRef.current = nextDirRef.current);
+    const head = { x: snake[0].x + DIRS[dir].x, y: snake[0].y + DIRS[dir].y };
+
+    const hitWall = head.x &lt; 0 || head.y &lt; 0 || head.x &gt;= GRID || head.y &gt;= GRID;
+    const hitSelf = snake.some((s) =&gt; s.x === head.x &amp;&amp; s.y === head.y);
+    if (hitWall || hitSelf) {
+      setStatus("over");
+      return;
+    }
+
+    snake.unshift(head);
+    if (head.x === foodRef.current.x &amp;&amp; head.y === foodRef.current.y) {
+      scoreRef.current += 1;
+      setScore(scoreRef.current);
+      if (scoreRef.current &gt;= 10 &amp;&amp; !flagShownRef.current) {
+        flagShownRef.current = true;
+        setFlagRevealed(true);
+      }
+      if (scoreRef.current &gt; highRef.current) {
+        highRef.current = scoreRef.current;
+        setHigh(highRef.current);
+        saveToStorage("snakeHighScore", highRef.current);
+      }
+      foodRef.current = spawnFood(snake);
+      speedRef.current = Math.max(70, speedRef.current - 4); // 越吃越快
+    } else {
+      snake.pop();
+    }
+    draw();
+  }, [draw, spawnFood]);
+
+  /** 开始 / 继续 */
+  const start = useCallback(() =&gt; {
+    if (statusRef.current === "over") reset();
+    setStatus("running");
+  }, [reset]);
+
+  /** 主循环 */
+  useEffect(() =&gt; {
+    if (status !== "running") return;
+    const timer = setInterval(step, speedRef.current);
+    return () =&gt; clearInterval(timer);
+  }, [status, step]);
+
+  /** 键盘控制 */
+  useEffect(() =&gt; {
+    const onKey = (e: KeyboardEvent) =&gt; {
+      const map: Record&lt;string, Dir&gt; = {
+        ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right",
+        w: "up", s: "down", a: "left", d: "right",
+        W: "up", S: "down", A: "left", D: "right",
+      };
+      const d = map[e.key];
+      if (d) {
+        e.preventDefault();
+        if (statusRef.current === "running") {
+          if (d !== OPPOSITE[dirRef.current]) nextDirRef.current = d;
+        } else {
+          nextDirRef.current = d;
+          start();
+        }
+      }
+      if (e.key === " " || e.key === "Enter") {
+        e.preventDefault();
+        if (statusRef.current === "idle") start();
+        else if (statusRef.current === "over") reset();
+        else setStatus("idle");
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () =&gt; window.removeEventListener("keydown", onKey);
+  }, [start, reset]);
+
+  /** 首次绘制 */
+  useEffect(() =&gt; {
+    reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /** 屏幕按钮方向控制 */
+  const pressDir = (d: Dir) =&gt; {
+    if (statusRef.current === "running") {
+      if (d !== OPPOSITE[dirRef.current]) nextDirRef.current = d;
+    } else {
+      nextDirRef.current = d;
+      start();
+    }
+  };
+
+  return (
+    &lt;div className="page"&gt;
+      &lt;div className="page-header"&gt;
+        &lt;h1 className="page-title"&gt;贪吃蛇游戏&lt;/h1&gt;
+        &lt;button className="back-btn" onClick={onBack}&gt;← 返回首页&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div className="snake-wrap"&gt;
+        &lt;canvas ref={canvasRef} width={CANVAS} height={CANVAS} className="snake-canvas" /&gt;
+
+        &lt;div className="snake-info"&gt;
+          &lt;span&gt;得分 &lt;b&gt;{score}&lt;/b&gt;&lt;/span&gt;
+          &lt;span&gt;最高 &lt;b&gt;{high}&lt;/b&gt;&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;div className="snake-controls"&gt;
+          &lt;button className="btn btn-primary" onClick={() =&gt; { if (status === "over") reset(); else if (status === "running") setStatus("idle"); else start(); }}&gt;
+            {status === "idle" ? "▶ 开始" : status === "running" ? "⏸ 暂停" : "↻ 重新开始"}
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div className="snake-controls"&gt;
+          &lt;button className="btn btn-ghost" onClick={() =&gt; pressDir("up")}&gt;↑&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div className="snake-controls"&gt;
+          &lt;button className="btn btn-ghost" onClick={() =&gt; pressDir("left")}&gt;←&lt;/button&gt;
+          &lt;button className="btn btn-ghost" onClick={() =&gt; pressDir("down")}&gt;↓&lt;/button&gt;
+          &lt;button className="btn btn-ghost" onClick={() =&gt; pressDir("right")}&gt;→&lt;/button&gt;
+        &lt;/div&gt;
+
+        {flagRevealed &amp;&amp; (
+          &lt;p className="flag-found"&gt;🎯 发现 flag：&lt;b&gt;{flags.snake}&lt;/b&gt; —— 回首页项目卡片提交解锁成就！&lt;/p&gt;
+        )}
+        &lt;p className="snake-hint"&gt;方向键 / WASD 控制方向，空格或回车开始 / 暂停。得分 ≥ 10 可发现 flag，最高分保存在浏览器本地。&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/projects/VisionDemo.tsx</span><span class="fmeta">378 行 · 12.8 KB</span></summary>
+    <pre class="code"><code>import { useEffect, useRef, useState } from "react";
+import { flags } from "../data/flags";
+import { toast } from "../utils/toast";
+
+type Mode = "face" | "motion" | "gesture";
+
+const MODE_LABEL: Record&lt;Mode, string&gt; = {
+  face: "人脸识别",
+  motion: "动作捕捉",
+  gesture: "手势识别",
+};
+
+let cvPromise: Promise&lt;void&gt; | null = null;
+
+/** 加载 OpenCV.js（脚本标签方式，避免打包问题；只加载一次） */
+function loadOpenCV(): Promise&lt;void&gt; {
+  if (!cvPromise) {
+    cvPromise = new Promise&lt;void&gt;((resolve, reject) =&gt; {
+      const w = window as any;
+      if (w.cv &amp;&amp; w.cv.Mat) {
+        resolve();
+        return;
+      }
+      const s = document.createElement("script");
+      s.src = "/opencv/opencv.js";
+      s.async = true;
+      s.onload = () =&gt; {
+        w.cv.onRuntimeInitialized = () =&gt; resolve();
+      };
+      s.onerror = () =&gt; {
+        cvPromise = null;
+        reject(new Error("OpenCV.js 加载失败"));
+      };
+      document.body.appendChild(s);
+    });
+  }
+  return cvPromise;
+}
+
+/** 视觉识别项目：人脸识别 / 动作捕捉 / 手势识别（OpenCV.js + 摄像头） */
+export default function VisionDemo({ onBack }: { onBack: () =&gt; void }) {
+  const videoRef = useRef&lt;HTMLVideoElement | null&gt;(null);
+  const canvasRef = useRef&lt;HTMLCanvasElement | null&gt;(null);
+  const streamRef = useRef&lt;MediaStream | null&gt;(null);
+  const animRef = useRef(0);
+  const cascadeRef = useRef&lt;any&gt;(null);
+  const prevGrayRef = useRef&lt;any&gt;(null);
+  const flagShownRef = useRef(false);
+  const modeRef = useRef&lt;Mode&gt;("face");
+  const runningRef = useRef(false);
+  const fpsRef = useRef(0);
+
+  const [mode, setMode] = useState&lt;Mode&gt;("face");
+  const [running, setRunning] = useState(false);
+  const [cvReady, setCvReady] = useState(false);
+  const [flagFound, setFlagFound] = useState(false);
+  const [status, setStatus] = useState("OpenCV.js 正在加载（约 10MB，请稍候）...");
+  const [fps, setFps] = useState(0);
+
+  useEffect(() =&gt; {
+    modeRef.current = mode;
+  }, [mode]);
+  useEffect(() =&gt; {
+    runningRef.current = running;
+  }, [running]);
+
+  /** 停止摄像头并清理 */
+  const stopCamera = () =&gt; {
+    runningRef.current = false;
+    setRunning(false);
+    cancelAnimationFrame(animRef.current);
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((t) =&gt; t.stop());
+      streamRef.current = null;
+    }
+    if (videoRef.current) videoRef.current.srcObject = null;
+    const canvas = canvasRef.current;
+    if (canvas) canvas.getContext("2d")?.clearRect(0, 0, canvas.width, canvas.height);
+    setStatus("已停止。");
+  };
+
+  /** 加载 OpenCV + 人脸级联模型 */
+  useEffect(() =&gt; {
+    let cancelled = false;
+    (async () =&gt; {
+      try {
+        await loadOpenCV();
+        if (cancelled) return;
+        const cv: any = (window as any).cv;
+        const res = await fetch("/opencv/haarcascade_frontalface_default.xml");
+        const xml = await res.text();
+        const bytes = new TextEncoder().encode(xml);
+        cv.FS_createDataFile("/", "haarcascade_frontalface_default.xml", new Uint8Array(bytes), true, false, false);
+        cascadeRef.current = new cv.CascadeClassifier();
+        const ok = cascadeRef.current.load("haarcascade_frontalface_default.xml");
+        if (!ok) throw new Error("人脸级联模型加载失败");
+        setCvReady(true);
+        setStatus("OpenCV.js 就绪。选择模式后点击“启动摄像头”。");
+      } catch (err) {
+        setStatus("初始化失败：" + (err instanceof Error ? err.message : String(err)));
+        toast("OpenCV 初始化失败", "error");
+      }
+    })();
+    return () =&gt; {
+      cancelled = true;
+      stopCamera();
+      if (cascadeRef.current) cascadeRef.current.delete();
+      if (prevGrayRef.current) prevGrayRef.current.delete();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /** 人脸识别：Haar 级联检测，画出人脸框并触发 flag */
+  const processFace = (cv: any, gray: any, ctx: CanvasRenderingContext2D) =&gt; {
+    const cascade = cascadeRef.current;
+    if (!cascade) return;
+    const faces = new cv.RectVector();
+    cascade.detectMultiScale(gray, faces, 1.1, 3, 0, new cv.Size(60, 60));
+    ctx.strokeStyle = "#00ffd1";
+    ctx.lineWidth = 3;
+    for (let i = 0; i &lt; faces.size(); i++) {
+      const r = faces.get(i);
+      ctx.strokeRect(r.x, r.y, r.width, r.height);
+      ctx.fillStyle = "rgba(0,255,209,0.9)";
+      ctx.font = "14px Consolas, monospace";
+      ctx.fillText("FACE", r.x, r.y - 6);
+      if (!flagShownRef.current) {
+        flagShownRef.current = true;
+        setFlagFound(true);
+        setStatus("🎯 检测到人脸！发现 flag：" + flags.vision);
+        toast("🎉 人脸识别成功！发现 flag", "success");
+      }
+    }
+    faces.delete();
+  };
+
+  /** 动作捕捉：帧差法找出运动区域 */
+  const processMotion = (cv: any, gray: any, ctx: CanvasRenderingContext2D) =&gt; {
+    if (!prevGrayRef.current) {
+      prevGrayRef.current = gray.clone();
+      return;
+    }
+    const diff = new cv.Mat();
+    cv.absdiff(gray, prevGrayRef.current, diff);
+    const thresh = new cv.Mat();
+    cv.threshold(diff, thresh, 30, 255, cv.THRESH_BINARY);
+    const kernel = cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(5, 5));
+    cv.morphologyEx(thresh, thresh, cv.MORPH_OPEN, kernel);
+    const contours = new cv.MatVector();
+    const hierarchy = new cv.Mat();
+    cv.findContours(thresh, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+    let count = 0;
+    ctx.strokeStyle = "#4d7cff";
+    ctx.lineWidth = 2;
+    for (let i = 0; i &lt; contours.size(); i++) {
+      const area = cv.contourArea(contours.get(i));
+      if (area &gt; 1500) {
+        const rect = cv.boundingRect(contours.get(i));
+        ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
+        count++;
+      }
+    }
+    ctx.fillStyle = "#4d7cff";
+    ctx.font = "14px Consolas, monospace";
+    ctx.fillText("MOTION x" + count, 12, 24);
+    prevGrayRef.current.delete();
+    prevGrayRef.current = gray.clone();
+    kernel.delete();
+    diff.delete();
+    thresh.delete();
+    contours.delete();
+    hierarchy.delete();
+  };
+
+  /** 手势识别：肤色分割 + 凸包缺陷数手指 */
+  const processGesture = (cv: any, src: any, ctx: CanvasRenderingContext2D) =&gt; {
+    const ycc = new cv.Mat();
+    cv.cvtColor(src, ycc, cv.COLOR_RGBA2YCrCb);
+    const mask = new cv.Mat();
+    cv.inRange(ycc, new cv.Scalar(0, 133, 77), new cv.Scalar(255, 173, 127), mask);
+    const kernel = cv.getStructuringElement(cv.MORPH_ELLIPSE, new cv.Size(9, 9));
+    cv.morphologyEx(mask, mask, cv.MORPH_OPEN, kernel);
+    cv.morphologyEx(mask, mask, cv.MORPH_CLOSE, kernel);
+    const contours = new cv.MatVector();
+    const hierarchy = new cv.Mat();
+    cv.findContours(mask, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+
+    let handIdx = -1;
+    let maxArea = 0;
+    for (let i = 0; i &lt; contours.size(); i++) {
+      const a = cv.contourArea(contours.get(i));
+      if (a &gt; maxArea) {
+        maxArea = a;
+        handIdx = i;
+      }
+    }
+
+    if (handIdx &gt;= 0 &amp;&amp; maxArea &gt; 4000) {
+      const contour = contours.get(handIdx);
+      // 画出手部轮廓
+      ctx.strokeStyle = "#00ffd1";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      const data = contour.data32S;
+      for (let i = 0; i &lt; contour.rows; i++) {
+        const x = data[i * 2];
+        const y = data[i * 2 + 1];
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.stroke();
+
+      const hullIdx = new cv.Mat();
+      cv.convexHull(contour, hullIdx, false, true);
+      let fingers = 1;
+      if (hullIdx.rows &gt; 3) {
+        const defects = new cv.Mat();
+        cv.convexityDefects(contour, hullIdx, defects);
+        const circle = new cv.Mat();
+        cv.minEnclosingCircle(contour, circle);
+        const radius = circle.data32F[2];
+        for (let i = 0; i &lt; defects.rows; i++) {
+          const d = defects.row(i).data32S;
+          const depth = d[3] / 256;
+          if (depth &gt; radius * 0.25) fingers++;
+        }
+        circle.delete();
+        defects.delete();
+      }
+      hullIdx.delete();
+      contour.delete();
+
+      ctx.fillStyle = "#ff4d6d";
+      ctx.font = "16px Consolas, monospace";
+      ctx.fillText("HAND · 手指: " + Math.min(fingers, 5), 12, 24);
+    }
+
+    ycc.delete();
+    mask.delete();
+    kernel.delete();
+    contours.delete();
+    hierarchy.delete();
+  };
+
+  /** 每一帧：把摄像头画面画到画布，再用 OpenCV 处理 */
+  const step = () =&gt; {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    const cv: any = (window as any).cv;
+    if (!video || !canvas || !cv) {
+      animRef.current = requestAnimationFrame(step);
+      return;
+    }
+    if (video.readyState &lt; 2) {
+      animRef.current = requestAnimationFrame(step);
+      return;
+    }
+    const vw = video.videoWidth;
+    const vh = video.videoHeight;
+    if (canvas.width !== vw) canvas.width = vw;
+    if (canvas.height !== vh) canvas.height = vh;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      animRef.current = requestAnimationFrame(step);
+      return;
+    }
+    ctx.drawImage(video, 0, 0, vw, vh);
+
+    const t0 = performance.now();
+    const src = cv.imread(canvas);
+    const gray = new cv.Mat();
+    cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
+    try {
+      if (modeRef.current === "face") processFace(cv, gray, ctx);
+      else if (modeRef.current === "motion") processMotion(cv, gray, ctx);
+      else processGesture(cv, src, ctx);
+    } finally {
+      src.delete();
+      gray.delete();
+    }
+    const dt = performance.now() - t0;
+    fpsRef.current = fpsRef.current * 0.9 + (1000 / Math.max(1, dt)) * 0.1;
+    const f = Math.round(fpsRef.current);
+    if (f !== fps) setFps(f);
+
+    if (runningRef.current) animRef.current = requestAnimationFrame(step);
+  };
+
+  /** 启动摄像头 */
+  const startCamera = async () =&gt; {
+    const w = window as any;
+    if (!w.cv || !cascadeRef.current) {
+      toast("OpenCV 尚未就绪，请稍候", "error");
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { width: 640, height: 480 },
+        audio: false,
+      });
+      streamRef.current = stream;
+      const video = videoRef.current;
+      if (!video) return;
+      video.srcObject = stream;
+      await video.play();
+      runningRef.current = true;
+      setRunning(true);
+      setStatus("运行中：" + MODE_LABEL[modeRef.current] + "（切换模式即时生效）");
+      animRef.current = requestAnimationFrame(step);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      setStatus("无法访问摄像头：" + msg);
+      toast("摄像头启动失败，请检查浏览器权限", "error");
+    }
+  };
+
+  const changeMode = (m: Mode) =&gt; {
+    setMode(m);
+    setStatus("运行中：" + MODE_LABEL[m] + "（切换模式即时生效）");
+  };
+
+  return (
+    &lt;div className="page"&gt;
+      &lt;div className="page-header"&gt;
+        &lt;h1 className="page-title"&gt;人脸识别 · 动作捕捉 · 手势识别&lt;/h1&gt;
+        &lt;button className="back-btn" onClick={onBack}&gt;← 返回首页&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div className="vision-wrap"&gt;
+        &lt;div className="vision-modes"&gt;
+          {(Object.keys(MODE_LABEL) as Mode[]).map((m) =&gt; (
+            &lt;button
+              key={m}
+              className={"btn " + (mode === m ? "btn-primary" : "btn-ghost")}
+              onClick={() =&gt; changeMode(m)}
+            &gt;
+              {MODE_LABEL[m]}
+            &lt;/button&gt;
+          ))}
+        &lt;/div&gt;
+
+        &lt;div className="vision-stage"&gt;
+          &lt;video ref={videoRef} playsInline muted className="vision-video" /&gt;
+          &lt;canvas ref={canvasRef} className="vision-canvas" /&gt;
+          {!running &amp;&amp; (
+            &lt;div className="vision-placeholder"&gt;
+              {cvReady ? "选择模式后点击「启动摄像头」" : status}
+            &lt;/div&gt;
+          )}
+          &lt;div className="vision-fps"&gt;FPS {fps}&lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div className="vision-actions"&gt;
+          {running ? (
+            &lt;button className="btn btn-danger" onClick={stopCamera}&gt;⏹ 停止摄像头&lt;/button&gt;
+          ) : (
+            &lt;button className="btn btn-primary" onClick={startCamera} disabled={!cvReady}&gt;
+              ▶ 启动摄像头
+            &lt;/button&gt;
+          )}
+        &lt;/div&gt;
+
+        {flagFound &amp;&amp; (
+          &lt;p className="flag-found"&gt;🎯 发现 flag：&lt;b&gt;{flags.vision}&lt;/b&gt; —— 回首页项目卡片提交解锁成就！&lt;/p&gt;
+        )}
+
+        &lt;p className="vision-status"&gt;{status}&lt;/p&gt;
+
+        &lt;div className="note-box"&gt;
+          💡 说明：本页使用 &lt;b&gt;OpenCV.js&lt;/b&gt;（OpenCV 官方浏览器版）实时处理摄像头画面：人脸识别（Haar 级联）、
+          动作捕捉（帧差法）、手势识别（肤色分割 + 凸包缺陷数手指）。首次打开需要允许浏览器使用摄像头。
+          完整 Python 代码在 &lt;b&gt;projects/opencv/face_gesture.py&lt;/b&gt;。
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">projects/README.md</span><span class="fmeta">9 行 · 295 B</span></summary>
+    <pre class="code"><code># 项目源码目录
+
+这里存放个人网站里「项目作品」的完整源码：
+
+- `crawler/` —— 爬虫项目（Python 完整版代码 + 说明）
+  - 贪吃蛇游戏是纯前端实现，源码在 `src/projects/SnakeGame.tsx`
+
+&gt; 两个项目都可以直接在网站里打开体验。
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">projects/crawler/README.md</span><span class="fmeta">24 行 · 699 B</span></summary>
+    <pre class="code"><code># 爬虫项目
+
+## 网页演示版（在网站里直接体验）
+在个人网站的「项目作品」→「爬虫项目」中打开，输入关键词即可演示抓取流程。
+演示版通过公开 API（Open Library 图书馆）实现，不需要后端。
+
+## Python 完整版（本目录）
+- `crawler.py` —— 一个简单的 Python 爬虫示例（requests + BeautifulSoup）
+
+### 运行方法
+1. 安装 Python（python.org 官网）
+2. 安装依赖：
+   ```bash
+   pip install requests beautifulsoup4
+   ```
+3. 运行：
+   ```bash
+   python crawler.py
+   ```
+
+### 注意
+- 爬取网页前请先查看目标网站的 `robots.txt`
+- 遵守法律法规，只爬取允许公开访问的数据
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">projects/crawler/crawler.py</span><span class="fmeta">49 行 · 1.5 KB</span></summary>
+    <pre class="code"><code># -*- coding: utf-8 -*-
+"""
+网络爬虫示例（Python 完整版）
+================================================
+运行前先安装依赖：
+    pip install requests beautifulsoup4
+
+用法：
+    python crawler.py
+
+注意：爬取网页前请先查看目标网站的 robots.txt，
+并且遵守法律法规，只爬取允许公开访问的数据。
+"""
+
+import requests
+from bs4 import BeautifulSoup
+
+
+def crawl(url: str, max_links: int = 10) -&gt; None:
+    """抓取一个网页，打印页面标题和前 max_links 个链接。"""
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    }
+    print(f"[*] 正在抓取: {url}")
+
+    # 1. 请求网页
+    resp = requests.get(url, headers=headers, timeout=10)
+    resp.raise_for_status()          # 状态码不是 2xx 就抛出异常
+    resp.encoding = resp.apparent_encoding
+
+    # 2. 解析 HTML
+    soup = BeautifulSoup(resp.text, "html.parser")
+
+    # 3. 提取信息
+    title = soup.title.string.strip() if soup.title and soup.title.string else "未知"
+    print(f"[+] 页面标题: {title}")
+
+    links = soup.find_all("a", href=True)
+    print(f"[+] 共发现 {len(links)} 个链接，打印前 {max_links} 个：")
+    for a in links[:max_links]:
+        text = a.get_text(strip=True)
+        if text:
+            print(f"    - {text[:40]}  -&gt;  {a['href']}")
+
+
+if __name__ == "__main__":
+    # 把这里换成你想抓取的网址（务必确认允许抓取）
+    crawl("https://example.com")
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">projects/opencv/README.md</span><span class="fmeta">28 行 · 994 B</span></summary>
+    <pre class="code"><code># 人脸识别 · 动作捕捉 · 手势识别（OpenCV）
+
+## 网页演示版（在网站里直接体验）
+在个人网站的「项目作品」→「人脸识别·动作捕捉·手势识别」中打开。
+网页版使用 **OpenCV.js**（OpenCV 官方浏览器版）+ 摄像头，在浏览器里实时运行：
+
+- 人脸识别：Haar 级联检测，绿色框标出人脸
+- 动作捕捉：帧差法找出画面中的运动区域
+- 手势识别：肤色分割 + 凸包缺陷数手指
+
+## Python 完整版（本目录）
+- `face_gesture.py` —— 使用 OpenCV（cv2）实现的完整版本
+
+### 运行方法
+1. 安装 Python（python.org 官网）
+2. 安装依赖：
+   ```bash
+   pip install opencv-python numpy
+   ```
+3. 运行：
+   ```bash
+   python face_gesture.py
+   ```
+4. 按键切换：`1` 人脸识别 / `2` 动作捕捉 / `3` 手势识别 / `ESC` 退出
+
+### 注意
+- 需要电脑有摄像头
+- 网页版在浏览器打开时需要允许摄像头权限（localhost 会自动允许）</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">projects/opencv/face_gesture.py</span><span class="fmeta">104 行 · 3.6 KB</span></summary>
+    <pre class="code"><code># -*- coding: utf-8 -*-
+"""
+人脸识别 + 动作捕捉 + 手势识别（Python + OpenCV 完整版）
+========================================================
+依赖安装：
+    pip install opencv-python numpy
+
+运行：
+    python face_gesture.py
+
+按键切换模式：
+    1  人脸识别
+    2  动作捕捉（帧差法）
+    3  手势识别（肤色分割 + 凸包缺陷数手指）
+    ESC 退出
+"""
+
+import cv2
+import numpy as np
+
+# 人脸检测级联模型（OpenCV 自带）
+face_cascade = cv2.CascadeClassifier(
+    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+)
+
+mode = 1
+prev_gray = None
+
+cap = cv2.VideoCapture(0)  # 0 表示默认摄像头
+if not cap.isOpened():
+    print("无法打开摄像头")
+    exit(1)
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    frame = cv2.flip(frame, 1)  # 镜像，方便观察
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    if mode == 1:
+        # ---------- 人脸识别（Haar 级联） ----------
+        faces = face_cascade.detectMultiScale(gray, 1.1, 3, minSize=(60, 60))
+        for (x, y, w, h) in faces:
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 209), 2)
+            cv2.putText(frame, "FACE", (x, y - 6),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 209), 2)
+
+    elif mode == 2:
+        # ---------- 动作捕捉（帧差法） ----------
+        if prev_gray is None:
+            prev_gray = gray
+            continue
+        diff = cv2.absdiff(gray, prev_gray)
+        _, thresh = cv2.threshold(diff, 30, 255, cv2.THRESH_BINARY)
+        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL,
+                                       cv2.CHAIN_APPROX_SIMPLE)
+        for c in contours:
+            if cv2.contourArea(c) &gt; 1500:
+                x, y, w, h = cv2.boundingRect(c)
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (77, 124, 255), 2)
+        prev_gray = gray.copy()
+
+    elif mode == 3:
+        # ---------- 手势识别（肤色分割 + 凸包缺陷数手指） ----------
+        ycrcb = cv2.cvtColor(frame, cv2.COLOR_BGR2YCrCb)
+        mask = cv2.inRange(ycrcb, (0, 133, 77), (255, 173, 127))
+        mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((9, 9), np.uint8))
+        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
+        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL,
+                                       cv2.CHAIN_APPROX_SIMPLE)
+        if contours:
+            hand = max(contours, key=cv2.contourArea)
+            if cv2.contourArea(hand) &gt; 4000:
+                hull = cv2.convexHull(hand, returnPoints=False)
+                fingers = 1
+                if len(hull) &gt; 3:
+                    defects = cv2.convexityDefects(hand, hull)
+                    if defects is not None:
+                        (_, _), radius = cv2.minEnclosingCircle(hand)
+                        for i in range(defects.shape[0]):
+                            _, _, _, depth = defects[i, 0]
+                            if depth / 256 &gt; radius * 0.25:
+                                fingers += 1
+                cv2.drawContours(frame, [hand], -1, (0, 255, 209), 2)
+                cv2.putText(frame, "HAND fingers: %d" % min(fingers, 5),
+                            (12, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7,
+                            (0, 255, 209), 2)
+
+    cv2.imshow("OpenCV Vision", frame)
+
+    key = cv2.waitKey(1) &amp; 0xFF
+    if key == ord("1"):
+        mode = 1
+    elif key == ord("2"):
+        mode = 2
+    elif key == ord("3"):
+        mode = 3
+    elif key == 27:  # ESC
+        break
+
+cap.release()
+cv2.destroyAllWindows()</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">public/favicon.svg</span><span class="fmeta">6 行 · 360 B</span></summary>
+    <pre class="code"><code>&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"&gt;
+  &lt;rect width="64" height="64" rx="12" fill="#070b12"/&gt;
+  &lt;rect x="10" y="10" width="44" height="44" rx="6" fill="none" stroke="#00ffd1" stroke-width="3"/&gt;
+  &lt;text x="32" y="42" font-family="Consolas, monospace" font-size="28" font-weight="bold" fill="#00ffd1" text-anchor="middle"&gt;Z&lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">public/music/说明.txt</span><span class="fmeta">7 行 · 284 B</span></summary>
+    <pre class="code"><code>请把音乐文件放到这里，文件名必须是：
+call-of-silence.mp3
+
+（泽野弘之《Call of Silence》，请使用你合法获取的音频文件，例如从 QQ音乐/网易云 等平台下载的 MP3）
+
+放好后刷新网站，点击右下角的音乐按钮即可播放。
+</code></pre>
+  </details>
+</section>
+  </section>
+</main>
+<footer>个人网站项目 · 源码提交材料 · 由 Codex 生成整理 · 2026-08-20</footer>
+</body>
+</html>

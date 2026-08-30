@@ -1115,3 +1115,40 @@
 .interest-card .item-desc {
   margin: 0;
 }
+
+/* ---------- 生活碎片 ---------- */
+.life-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+
+.life-card {
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.life-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.life-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.life-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 1rem;
+}
+
+.life-title { font-weight: 600; color: #fff; font-size: 0.95rem; }
+.life-date { color: var(--muted); font-size: 0.8rem; font-family: var(--mono); }

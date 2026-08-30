@@ -8,6 +8,7 @@ const links = [
   { id: "experience", label: "经历" },
   { id: "hobbies", label: "爱好" },
   { id: "strengths", label: "特长" },
+  { id: "life", label: "生活" },
   { id: "projects", label: "项目" },
   { id: "contact", label: "联系" },
 ];
