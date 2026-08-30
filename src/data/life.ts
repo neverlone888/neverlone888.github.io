@@ -13,5 +13,4 @@ export const lifePhotos: LifePhoto[] = [
   { title: "生活照片 6", date: "2026-08-30", image: "/life/life-6.jpg" },
   { title: "生活照片 7", date: "2026-08-30", image: "/life/life-7.jpg" },
   { title: "生活照片 8", date: "2026-08-30", image: "/life/life-8.jpg" },
-  { title: "生活照片 9", date: "2026-08-30", image: "/life/life-9.jpg" },
 ];
