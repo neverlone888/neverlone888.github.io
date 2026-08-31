@@ -41,7 +41,8 @@ function App() {
 
   return (
     <>
-      <div className="aurora" aria-hidden="true"><span /><span /><span /></div>
+      <video className="video-bg" src="bg/video-bg.mp4" autoPlay muted loop playsInline preload="auto" aria-hidden="true" />
+      <div className="video-bg-overlay" aria-hidden="true" />
       <BackgroundFX />
       <Sparkles />
       {showBoot && <BootScreen onDone={() => setShowBoot(false)} />}
