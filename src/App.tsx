@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import BackgroundFX from "./components/BackgroundFX";
+import Sparkles from "./components/Sparkles";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Stats from "./components/Stats";
@@ -40,7 +41,9 @@ function App() {
 
   return (
     <>
+      <div className="aurora" aria-hidden="true"><span /><span /><span /></div>
       <BackgroundFX />
+      <Sparkles />
       {showBoot && <BootScreen onDone={() => setShowBoot(false)} />}
 
       <Navbar view={view} onNavigate={setView} />

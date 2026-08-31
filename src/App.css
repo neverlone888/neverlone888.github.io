@@ -1163,3 +1163,58 @@
   pointer-events: none;
   opacity: 0.5;
 }
+/* ---------- 极光渐变背景（参考 motionsite 动态背景风格） ---------- */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.aurora span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.32;
+  animation: aurora-move 18s ease-in-out infinite alternate;
+}
+.aurora span:nth-child(1) { width: 46vw; height: 46vw; background: #00ffd1; top: -12%; left: -6%; }
+.aurora span:nth-child(2) { width: 42vw; height: 42vw; background: #4d7cff; top: 32%; right: -12%; animation-delay: -6s; }
+.aurora span:nth-child(3) { width: 38vw; height: 38vw; background: #9b5cff; bottom: -14%; left: 28%; animation-delay: -12s; }
+@keyframes aurora-move {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(5vw, -4vh) scale(1.18); }
+}
+
+/* ---------- 漂浮星光 ---------- */
+.sparkles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.sparkles i {
+  position: absolute;
+  bottom: -12px;
+  border-radius: 50%;
+  background: rgba(0, 255, 209, 0.85);
+  box-shadow: 0 0 8px rgba(0, 255, 209, 0.9);
+  opacity: 0;
+  animation: sparkle-fly 12s linear infinite;
+}
+.sparkles i:nth-child(2n) { background: rgba(77, 124, 255, 0.85); box-shadow: 0 0 8px rgba(77, 124, 255, 0.9); }
+.sparkles i:nth-child(3n) { background: rgba(255, 255, 255, 0.7); box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); }
+@keyframes sparkle-fly {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  8% { opacity: 1; }
+  100% { transform: translateY(-108vh) translateX(5vw); opacity: 0; }
+}
+
+/* ---------- 渐变文字 ---------- */
+.section-title {
+  background: linear-gradient(135deg, #00ffd1 0%, #4d7cff 55%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
