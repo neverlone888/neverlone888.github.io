@@ -50,7 +50,7 @@
       <div><b>主要功能</b><span>开机动画、交互终端、证书墙、兴趣爱好、个人特长、生活碎片照片墙、项目演示（贪吃蛇 / 爬虫 / 人脸识别）、音乐播放器、联系方式</span></div>
       <div><b>数据存储</b><span>浏览器 localStorage / 静态资源</span></div>
     </div>
-    <div class="note">&#128221; 本文档为 HTML 格式的提交材料，内含本项目的<b>完整源码</b>（共 50 个文本源码文件、约 4967 行代码），并附项目完整文件清单。图片、音乐、OpenCV 等二进制资源与完整工程请见同文件夹下的「项目源码」目录及压缩包。</div>
+    <div class="note">&#128221; 本文档为 HTML 格式的提交材料，内含本项目的<b>完整源码</b>（共 52 个文本源码文件、约 5196 行代码），并附项目完整文件清单。图片、音乐、OpenCV 等二进制资源与完整工程请见同文件夹下的「项目源码」目录及压缩包。</div>
   </section>
 
   <section>
@@ -74,6 +74,7 @@
     <li><span class="t-ok">&#128193;</span> src/App.css</li>
     <li><span class="t-ok">&#128193;</span> src/index.css</li>
     <li><span class="t-ok">&#128193;</span> src/components/About.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/BackgroundFX.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/components/BootScreen.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/components/CertificateWall.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/components/Contact.tsx</li>
@@ -86,6 +87,7 @@
     <li><span class="t-ok">&#128193;</span> src/components/Navbar.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/components/Projects.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/components/Reveal.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Sparkles.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/components/Stats.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/components/Strengths.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/components/Terminal.tsx</li>
@@ -1589,7 +1591,7 @@ public/music/call-of-silence.mp3
 </section>
 <section class="file">
   <details>
-    <summary><span class="fpath">vite.config.ts</span><span class="fmeta">15 行 · 428 B</span></summary>
+    <summary><span class="fpath">vite.config.ts</span><span class="fmeta">15 行 · 461 B</span></summary>
     <pre class="code"><code>import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -1600,8 +1602,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     watch: {
-      // opencv.js 体积很大且不需要热更新，避免文件监视导致崩溃
-      ignored: ["**/public/opencv/**"],
+      // opencv.js / 背景视频体积很大且不需要热更新，避免文件监视导致崩溃
+      ignored: ["**/public/opencv/**", "**/public/bg/**"],
     },
   },
 })</code></pre>
@@ -1815,9 +1817,11 @@ createRoot(document.getElementById('root')!).render(
 </section>
 <section class="file">
   <details>
-    <summary><span class="fpath">src/App.tsx</span><span class="fmeta">72 行 · 2.3 KB</span></summary>
+    <summary><span class="fpath">src/App.tsx</span><span class="fmeta">78 行 · 2.6 KB</span></summary>
     <pre class="code"><code>import { useState } from "react";
 import Navbar from "./components/Navbar";
+import BackgroundFX from "./components/BackgroundFX";
+import Sparkles from "./components/Sparkles";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Stats from "./components/Stats";
@@ -1857,6 +1861,10 @@ function App() {
 
   return (
     &lt;&gt;
+      &lt;video className="video-bg" src="bg/video-bg.mp4" autoPlay muted loop playsInline preload="auto" aria-hidden="true" /&gt;
+      &lt;div className="video-bg-overlay" aria-hidden="true" /&gt;
+      &lt;BackgroundFX /&gt;
+      &lt;Sparkles /&gt;
       {showBoot &amp;&amp; &lt;BootScreen onDone={() =&gt; setShowBoot(false)} /&gt;}
 
       &lt;Navbar view={view} onNavigate={setView} /&gt;
@@ -1892,7 +1900,7 @@ export default App;</code></pre>
 </section>
 <section class="file">
   <details>
-    <summary><span class="fpath">src/App.css</span><span class="fmeta">1154 行 · 23.3 KB</span></summary>
+    <summary><span class="fpath">src/App.css</span><span class="fmeta">1241 行 · 25.7 KB</span></summary>
     <pre class="code"><code>/* ============================================================
    页面样式：导航 / 首屏 / 板块 / 卡片 / 项目页 / 音乐播放器
    ============================================================ */
@@ -3046,7 +3054,94 @@ export default App;</code></pre>
 }
 
 .life-title { font-weight: 600; color: #fff; font-size: 0.95rem; }
-.life-date { color: var(--muted); font-size: 0.8rem; font-family: var(--mono); }</code></pre>
+.life-date { color: var(--muted); font-size: 0.8rem; font-family: var(--mono); }
+/* ---------- 动态粒子背景 ---------- */
+.bg-fx {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+}
+/* ---------- 极光渐变背景（参考 motionsite 动态背景风格） ---------- */
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.aurora span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.32;
+  animation: aurora-move 18s ease-in-out infinite alternate;
+}
+.aurora span:nth-child(1) { width: 46vw; height: 46vw; background: #00ffd1; top: -12%; left: -6%; }
+.aurora span:nth-child(2) { width: 42vw; height: 42vw; background: #4d7cff; top: 32%; right: -12%; animation-delay: -6s; }
+.aurora span:nth-child(3) { width: 38vw; height: 38vw; background: #9b5cff; bottom: -14%; left: 28%; animation-delay: -12s; }
+@keyframes aurora-move {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(5vw, -4vh) scale(1.18); }
+}
+
+/* ---------- 漂浮星光 ---------- */
+.sparkles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.sparkles i {
+  position: absolute;
+  bottom: -12px;
+  border-radius: 50%;
+  background: rgba(0, 255, 209, 0.85);
+  box-shadow: 0 0 8px rgba(0, 255, 209, 0.9);
+  opacity: 0;
+  animation: sparkle-fly 12s linear infinite;
+}
+.sparkles i:nth-child(2n) { background: rgba(77, 124, 255, 0.85); box-shadow: 0 0 8px rgba(77, 124, 255, 0.9); }
+.sparkles i:nth-child(3n) { background: rgba(255, 255, 255, 0.7); box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); }
+@keyframes sparkle-fly {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  8% { opacity: 1; }
+  100% { transform: translateY(-108vh) translateX(5vw); opacity: 0; }
+}
+
+/* ---------- 渐变文字 ---------- */
+.section-title {
+  background: linear-gradient(135deg, #00ffd1 0%, #4d7cff 55%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* ---------- 视频背景（参考 motionsite 动态背景） ---------- */
+.video-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -3;
+  pointer-events: none;
+  object-fit: cover;
+  transform: scale(1.01);
+  opacity: 0.9;
+}
+.video-bg-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+  background: rgba(3, 7, 18, 0.55);
+}</code></pre>
   </details>
 </section>
 <section class="file">
@@ -3216,6 +3311,115 @@ export default function About() {
   );
 }
 </code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/BackgroundFX.tsx</span><span class="fmeta">104 行 · 3.1 KB</span></summary>
+    <pre class="code"><code>import { useEffect, useRef } from "react";
+
+/** 动态粒子背景：星辰连线（Canvas 动画，跟随鼠标） */
+export default function BackgroundFX() {
+  const canvasRef = useRef&lt;HTMLCanvasElement&gt;(null);
+
+  useEffect(() =&gt; {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let raf = 0;
+    let particles: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
+    const mouse = { x: -9999, y: -9999 };
+
+    const resize = () =&gt; {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const count = Math.min(90, Math.floor((canvas.width * canvas.height) / 16000));
+      particles = Array.from({ length: count }, () =&gt; ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: 1 + Math.random() * 1.8,
+      }));
+    };
+
+    const onMouse = (e: MouseEvent) =&gt; {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+    const onMouseOut = () =&gt; {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    };
+
+    const step = () =&gt; {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x &lt; 0 || p.x &gt; canvas.width) p.vx *= -1;
+        if (p.y &lt; 0 || p.y &gt; canvas.height) p.vy *= -1;
+      }
+
+      // 连线
+      for (let i = 0; i &lt; particles.length; i++) {
+        const a = particles[i];
+        for (let j = i + 1; j &lt; particles.length; j++) {
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const d = Math.hypot(dx, dy);
+          if (d &lt; 130) {
+            ctx.strokeStyle = `rgba(0,255,209,${(1 - d / 130) * 0.22})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+        // 鼠标连线
+        const dxm = a.x - mouse.x;
+        const dym = a.y - mouse.y;
+        const dm = Math.hypot(dxm, dym);
+        if (dm &lt; 160) {
+          ctx.strokeStyle = `rgba(255,209,102,${(1 - dm / 160) * 0.35})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+      }
+
+      // 粒子
+      for (const p of particles) {
+        ctx.fillStyle = "rgba(0,255,209,0.55)";
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      raf = requestAnimationFrame(step);
+    };
+
+    resize();
+    step();
+    window.addEventListener("resize", resize);
+    window.addEventListener("mousemove", onMouse);
+    window.addEventListener("mouseout", onMouseOut);
+    return () =&gt; {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", onMouse);
+      window.removeEventListener("mouseout", onMouseOut);
+    };
+  }, []);
+
+  return &lt;canvas ref={canvasRef} className="bg-fx" aria-hidden="true" /&gt;;
+}</code></pre>
   </details>
 </section>
 <section class="file">
@@ -3879,6 +4083,43 @@ export default function Reveal({ children, className = "" }: { children: ReactNo
   );
 }
 </code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/components/Sparkles.tsx</span><span class="fmeta">32 行 · 758 B</span></summary>
+    <pre class="code"><code>import { useMemo } from "react";
+
+/** 漂浮星光特效（参考 motionsite 风格） */
+export default function Sparkles() {
+  const dots = useMemo(
+    () =&gt;
+      Array.from({ length: 26 }, () =&gt; ({
+        left: Math.random() * 100,
+        delay: Math.random() * 14,
+        duration: 10 + Math.random() * 14,
+        size: 2 + Math.random() * 3,
+      })),
+    []
+  );
+
+  return (
+    &lt;div className="sparkles" aria-hidden="true"&gt;
+      {dots.map((d, i) =&gt; (
+        &lt;i
+          key={i}
+          style={{
+            left: d.left + "%",
+            animationDelay: d.delay + "s",
+            animationDuration: d.duration + "s",
+            width: d.size + "px",
+            height: d.size + "px",
+          }}
+        /&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</code></pre>
   </details>
 </section>
 <section class="file">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import BackgroundFX from "./components/BackgroundFX";
 import Sparkles from "./components/Sparkles";
+import VideoBackground from "./components/VideoBackground";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Stats from "./components/Stats";
@@ -41,8 +42,8 @@ function App() {
 
   return (
     <>
-      <video className="video-bg" src="bg/video-bg.mp4" autoPlay muted loop playsInline preload="auto" aria-hidden="true" />
-      <div className="video-bg-overlay" aria-hidden="true" />
+      <div className="aurora" aria-hidden="true"><span /><span /><span /></div>
+      <VideoBackground />
       <BackgroundFX />
       <Sparkles />
       {showBoot && <BootScreen onDone={() => setShowBoot(false)} />}

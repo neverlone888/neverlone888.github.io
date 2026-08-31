@@ -1167,7 +1167,7 @@
 .aurora {
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: -4;
   pointer-events: none;
   overflow: hidden;
 }
@@ -1237,5 +1237,35 @@
   height: 100%;
   z-index: -2;
   pointer-events: none;
-  background: rgba(3, 7, 18, 0.55);
+  background: rgba(3, 7, 18, 0.25);
+}
+/* ---------- 蓝天白云背景（图片 + CSS 云动画，file:// 可靠） ---------- */
+.sky-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background: url(bg/poster.jpg) center / cover no-repeat;
+}
+.clouds {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.clouds span {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.55);
+  filter: blur(26px);
+  border-radius: 50%;
+  opacity: 0.65;
+  animation: cloud-drift 45s linear infinite;
+}
+.clouds span:nth-child(1) { width: 42vw; height: 130px; top: 12%; left: -35%; }
+.clouds span:nth-child(2) { width: 30vw; height: 90px; top: 38%; left: -25%; animation-delay: -20s; animation-duration: 60s; }
+.clouds span:nth-child(3) { width: 50vw; height: 115px; top: 62%; left: -45%; animation-delay: -32s; animation-duration: 55s; }
+@keyframes cloud-drift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(135vw); }
 }

@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const LINES = [
   "Cyber Terminal v2.0.1",
@@ -21,6 +21,8 @@ export default function BootScreen({ onDone }: { onDone: () => void }) {
       if (i >= LINES.length) {
         clearInterval(timer);
         setPrompt(true);
+        // 开机动画展示约 3 秒后自动进入，无需点击
+        setTimeout(() => onDone(), 1200);
       }
     }, 380);
     return () => clearInterval(timer);

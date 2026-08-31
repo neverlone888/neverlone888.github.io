@@ -1,0 +1,4 @@
+个人网站线上地址：https://neverlone888.github.io/
+
+本地打开方式：
+  进入「网站_直接打开」文件夹 → 双击 index.html 即可直接浏览
