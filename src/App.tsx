@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
+import BackgroundFX from "./components/BackgroundFX";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Stats from "./components/Stats";
@@ -39,6 +40,7 @@ function App() {
 
   return (
     <>
+      <BackgroundFX />
       {showBoot && <BootScreen onDone={() => setShowBoot(false)} />}
 
       <Navbar view={view} onNavigate={setView} />

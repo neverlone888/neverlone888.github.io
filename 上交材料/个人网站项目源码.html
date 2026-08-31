@@ -47,10 +47,10 @@
     <div class="card grid2">
       <div><b>项目类型</b><span>个人简历网站</span></div>
       <div><b>技术栈</b><span>React 19 / TypeScript / Vite</span></div>
-      <div><b>主要功能</b><span>开机动画、交互终端、证书墙、兴趣爱好、个人特长、项目演示（贪吃蛇 / 爬虫 / 人脸识别）、音乐播放器、联系方式</span></div>
+      <div><b>主要功能</b><span>开机动画、交互终端、证书墙、兴趣爱好、个人特长、生活碎片照片墙、项目演示（贪吃蛇 / 爬虫 / 人脸识别）、音乐播放器、联系方式</span></div>
       <div><b>数据存储</b><span>浏览器 localStorage / 静态资源</span></div>
     </div>
-    <div class="note">&#128221; 本文档为 HTML 格式的提交材料，内含本项目的<b>完整源码</b>（共 48 个文本源码文件、约 4883 行代码），并附项目完整文件清单。图片、音乐、OpenCV 等二进制资源与完整工程请见随附压缩包。</div>
+    <div class="note">&#128221; 本文档为 HTML 格式的提交材料，内含本项目的<b>完整源码</b>（共 50 个文本源码文件、约 4967 行代码），并附项目完整文件清单。图片、音乐、OpenCV 等二进制资源与完整工程请见同文件夹下的「项目源码」目录及压缩包。</div>
   </section>
 
   <section>
@@ -81,6 +81,7 @@
     <li><span class="t-ok">&#128193;</span> src/components/Footer.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/components/Hero.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/components/Hobbies.tsx</li>
+    <li><span class="t-ok">&#128193;</span> src/components/Life.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/components/MusicPlayer.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/components/Navbar.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/components/Projects.tsx</li>
@@ -91,6 +92,7 @@
     <li><span class="t-ok">&#128193;</span> src/components/Toasts.tsx</li>
     <li><span class="t-ok">&#128193;</span> src/data/certificates.ts</li>
     <li><span class="t-ok">&#128193;</span> src/data/flags.ts</li>
+    <li><span class="t-ok">&#128193;</span> src/data/life.ts</li>
     <li><span class="t-ok">&#128193;</span> src/data/profile.ts</li>
     <li><span class="t-ok">&#128193;</span> src/hooks/useCountUp.ts</li>
     <li><span class="t-ok">&#128193;</span> src/utils/storage.ts</li>
@@ -109,6 +111,15 @@
     <li><span class="t-bin">&#128444;</span> public/certificates/cert-1.jpg <em>（二进制资源，315.6 KB）</em></li>
     <li><span class="t-bin">&#128444;</span> public/certificates/cert-2.jpg <em>（二进制资源，309.5 KB）</em></li>
     <li><span class="t-bin">&#128444;</span> public/certificates/cert-3.jpg <em>（二进制资源，614.9 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/certificates/cert-4.jpg <em>（二进制资源，287.4 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/life/life-1.jpg <em>（二进制资源，372.5 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/life/life-2.jpg <em>（二进制资源，314.0 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/life/life-3.jpg <em>（二进制资源，292.8 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/life/life-4.jpg <em>（二进制资源，448.8 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/life/life-5.jpg <em>（二进制资源，126.7 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/life/life-6.jpg <em>（二进制资源，310.0 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/life/life-7.jpg <em>（二进制资源，310.0 KB）</em></li>
+    <li><span class="t-bin">&#128444;</span> public/life/life-8.jpg <em>（二进制资源，211.6 KB）</em></li>
     <li><span class="t-bin">&#128444;</span> public/music/call-of-silence.mp3 <em>（二进制资源，7.32 MB）</em></li>
     <li><span class="t-bin">&#128444;</span> public/opencv/haarcascade_frontalface_default.xml <em>（二进制资源，908.3 KB）</em></li>
     <li><span class="t-bin">&#128444;</span> public/opencv/opencv.js <em>（二进制资源，10.46 MB）</em></li>
@@ -1804,7 +1815,7 @@ createRoot(document.getElementById('root')!).render(
 </section>
 <section class="file">
   <details>
-    <summary><span class="fpath">src/App.tsx</span><span class="fmeta">70 行 · 2.2 KB</span></summary>
+    <summary><span class="fpath">src/App.tsx</span><span class="fmeta">72 行 · 2.3 KB</span></summary>
     <pre class="code"><code>import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -1814,6 +1825,7 @@ import CertificateWall from "./components/CertificateWall";
 import Experience from "./components/Experience";
 import Hobbies from "./components/Hobbies";
 import Strengths from "./components/Strengths";
+import Life from "./components/Life";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -1858,6 +1870,7 @@ function App() {
           &lt;Experience /&gt;
           &lt;Hobbies /&gt;
           &lt;Strengths /&gt;
+          &lt;Life /&gt;
           &lt;Projects onOpen={setView} /&gt;
           &lt;Contact /&gt;
           &lt;Footer /&gt;
@@ -1879,7 +1892,7 @@ export default App;</code></pre>
 </section>
 <section class="file">
   <details>
-    <summary><span class="fpath">src/App.css</span><span class="fmeta">1118 行 · 22.5 KB</span></summary>
+    <summary><span class="fpath">src/App.css</span><span class="fmeta">1154 行 · 23.3 KB</span></summary>
     <pre class="code"><code>/* ============================================================
    页面样式：导航 / 首屏 / 板块 / 卡片 / 项目页 / 音乐播放器
    ============================================================ */
@@ -2997,7 +3010,43 @@ export default App;</code></pre>
 .interest-card .item-desc {
   margin: 0;
 }
-</code></pre>
+
+/* ---------- 生活碎片 ---------- */
+.life-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+
+.life-card {
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.life-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.life-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.life-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 1rem;
+}
+
+.life-title { font-weight: 600; color: #fff; font-size: 0.95rem; }
+.life-date { color: var(--muted); font-size: 0.8rem; font-family: var(--mono); }</code></pre>
   </details>
 </section>
 <section class="file">
@@ -3456,6 +3505,38 @@ export default function Hobbies() {
 </section>
 <section class="file">
   <details>
+    <summary><span class="fpath">src/components/Life.tsx</span><span class="fmeta">27 行 · 832 B</span></summary>
+    <pre class="code"><code>import { lifePhotos } from "../data/life";
+import Reveal from "./Reveal";
+
+/** 生活板块：照片墙 */
+export default function Life() {
+  return (
+    &lt;section id="life" className="section"&gt;
+      &lt;Reveal&gt;
+        &lt;p className="section-label"&gt;{"$ ls life/"}&lt;/p&gt;
+        &lt;h2 className="section-title"&gt;生活碎片&lt;/h2&gt;
+        &lt;p className="section-sub"&gt;记录日常 · 分享热爱&lt;/p&gt;
+      &lt;/Reveal&gt;
+
+      &lt;div className="life-wall"&gt;
+        {lifePhotos.map((p, i) =&gt; (
+          &lt;Reveal key={i} className="life-card"&gt;
+            &lt;img src={p.image} alt={p.title} loading="lazy" /&gt;
+            &lt;div className="life-info"&gt;
+              &lt;span className="life-title"&gt;{p.title}&lt;/span&gt;
+              &lt;span className="life-date"&gt;{p.date}&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/Reveal&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/section&gt;
+  );
+}</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
     <summary><span class="fpath">src/components/MusicPlayer.tsx</span><span class="fmeta">89 行 · 2.8 KB</span></summary>
     <pre class="code"><code>import { useEffect, useRef, useState } from "react";
 import { loadFromStorage, saveToStorage } from "../utils/storage";
@@ -3550,7 +3631,7 @@ export default function MusicPlayer() {
 </section>
 <section class="file">
   <details>
-    <summary><span class="fpath">src/components/Navbar.tsx</span><span class="fmeta">65 行 · 2.1 KB</span></summary>
+    <summary><span class="fpath">src/components/Navbar.tsx</span><span class="fmeta">66 行 · 2.1 KB</span></summary>
     <pre class="code"><code>import { useEffect, useState } from "react";
 import { profile } from "../data/profile";
 import type { View } from "../App";
@@ -3561,6 +3642,7 @@ const links = [
   { id: "experience", label: "经历" },
   { id: "hobbies", label: "爱好" },
   { id: "strengths", label: "特长" },
+  { id: "life", label: "生活" },
   { id: "projects", label: "项目" },
   { id: "contact", label: "联系" },
 ];
@@ -4029,7 +4111,7 @@ export default function Toasts() {
 </section>
 <section class="file">
   <details>
-    <summary><span class="fpath">src/data/certificates.ts</span><span class="fmeta">21 行 · 803 B</span></summary>
+    <summary><span class="fpath">src/data/certificates.ts</span><span class="fmeta">22 行 · 877 B</span></summary>
     <pre class="code"><code>/**
  * 证书墙数据 —— 证书图片和文字都在这里配置！
  *
@@ -4050,6 +4132,7 @@ export const certificates: CertificateItem[] = [
   { title: "证书 1", date: "2026", image: "/certificates/cert-1.jpg" },
   { title: "证书 2", date: "20XX", image: "/certificates/cert-2.jpg" },
   { title: "证书 3", date: "20XX", image: "/certificates/cert-3.jpg" },
+  { title: "证书 4", date: "20XX", image: "/certificates/cert-4.jpg" },
 ];</code></pre>
   </details>
 </section>
@@ -4083,6 +4166,28 @@ export function addSolved(key: string): string[] {
   }
   return list;
 }</code></pre>
+  </details>
+</section>
+<section class="file">
+  <details>
+    <summary><span class="fpath">src/data/life.ts</span><span class="fmeta">17 行 · 750 B</span></summary>
+    <pre class="code"><code>export interface LifePhoto {
+  title: string;
+  date: string;
+  image: string;
+}
+
+export const lifePhotos: LifePhoto[] = [
+  { title: "生活照片 1", date: "2026-08-30", image: "/life/life-1.jpg" },
+  { title: "生活照片 2", date: "2026-08-30", image: "/life/life-2.jpg" },
+  { title: "生活照片 3", date: "2026-08-30", image: "/life/life-3.jpg" },
+  { title: "生活照片 4", date: "2026-08-30", image: "/life/life-4.jpg" },
+  { title: "生活照片 5", date: "2026-08-30", image: "/life/life-5.jpg" },
+  { title: "生活照片 6", date: "2026-08-30", image: "/life/life-6.jpg" },
+  { title: "生活照片 7", date: "2026-08-30", image: "/life/life-7.jpg" },
+  { title: "生活照片 8", date: "2026-08-30", image: "/life/life-8.jpg" },
+];
+</code></pre>
   </details>
 </section>
 <section class="file">
@@ -5244,6 +5349,6 @@ call-of-silence.mp3
 </section>
   </section>
 </main>
-<footer>个人网站项目 · 源码提交材料 · 由 Codex 生成整理 · 2026-08-20</footer>
+<footer>个人网站项目 · 完整源码 · 2026-08-30</footer>
 </body>
 </html>
